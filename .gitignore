@@ -1,0 +1,36 @@
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+id_rsa
+id_ed25519
+id_*
+!id_*.pub
+
+# Common credential exports
+credentials.*
+secrets.*
+*.ovpn
+*.mobileconfig
+
+# Local editor, OS, and Python artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Generated output
+*.log
+logs/
+output/
