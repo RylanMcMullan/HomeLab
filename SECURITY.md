@@ -11,6 +11,7 @@ This is a public GitHub repository. Assume its full history, branches, issues, p
 - SSH private keys; private certificates; VPN credentials; authentication keys.
 - `.env` files that contain secrets or complete production configuration containing secrets.
 - Unredacted router exports, service configs, logs, backups, QR codes, or screenshots that contain sensitive values.
+- Password-vault databases, exports, recovery kits, master-password hints, real password-auditing wordlists, malware samples, packet captures, and security-assessment target lists.
 
 Use placeholders such as `<SECRET>`, `<API_TOKEN>`, `<PUBLIC_IP>`, `<USERNAME>`, `<DOMAIN>`, and `<CREDENTIAL>`.
 
@@ -20,6 +21,13 @@ Use placeholders such as `<SECRET>`, `<API_TOKEN>`, `<PUBLIC_IP>`, `<USERNAME>`,
 - Document a service’s exposure architecturally; link to vendor documentation where detailed setup would require secret values.
 - Put repository-safe templates in `configs/` only when all secrets are placeholders. Put no live secret-bearing configuration here.
 - Keep secrets in a dedicated secret manager or another owner-controlled private location.
+
+## Security lab and password-manager requirements
+
+- Security testing is limited to owner-controlled systems or targets covered by explicit authorization and scope. Do not publish target lists, captured data, or credentials.
+- A Kali or other research VM is not authorization to test third-party systems. Keep its management plane private and define resource limits, logging, and an emergency stop procedure before long-running activity.
+- Do not execute malware until a dedicated containment design has been reviewed and verified. The planned lab must not have a route to household devices, HomeLab management, production services, or uncontrolled internet access.
+- A self-hosted password manager must not become the sole credential copy until encrypted exports, backups, updates, HTTPS, MFA, recovery access, and a restore test are established.
 
 ## If a secret is found
 

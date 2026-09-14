@@ -4,6 +4,6 @@ Host documents describe systems that run an operating system or hypervisor. Netw
 
 | Host | Current role | OS / platform | Status |
 | --- | --- | --- | --- |
-| [HP EliteDesk](proxmox-node.md) | Primary virtualization node | Proxmox VE; version `UNKNOWN` | Deployed |
+| [HP EliteDesk](proxmox-node.md) | Primary virtualization node | Proxmox VE 9.2 | Deployed |
 | [Raspberry Pi 5](raspberry-pi-5.md) | Minecraft Java server host | OS `UNKNOWN` | Deployed |
-| [Acer Nitro 5 AN515-54](acer-nitro-5.md) | Future local AI server/node | Windows 11 Home | Planned role; not deployed as AI server |
+| [Acer Nitro 5 AN515-54](acer-nitro-5.md) | In-progress local AI server/node conversion | Windows 11 Home | Hardware inventoried; Linux/AI stack not deployed |

@@ -34,3 +34,5 @@ venv/
 *.log
 logs/
 output/
+inventory-output/
+*.inventory.txt

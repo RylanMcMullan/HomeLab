@@ -36,6 +36,13 @@ This repository is the canonical, public documentation source of truth for the H
 - If provided information appears unsafe to publish, stop and warn the owner instead of adding it.
 - Follow [SECURITY.md](SECURITY.md).
 
+## Security-research boundaries
+
+- Perform security testing only against systems owned by the operator or covered by explicit authorization and scope.
+- Do not infer permission to scan, exploit, monitor, or test third-party systems from the existence of security tooling or a Kali VM.
+- Treat malware execution as prohibited until the dedicated isolation design is implemented and verified. Never execute samples on ordinary HomeLab, household, personal, or production-connected systems.
+- Keep targets, captured data, credentials, wordlists containing real account material, malware samples, and engagement results out of this public repository.
+
 ## Before finishing any task
 
 1. Inspect affected files and cross-links.

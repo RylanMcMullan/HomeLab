@@ -4,7 +4,12 @@ This changelog records significant infrastructure changes only. Documentation-on
 
 ## Unreleased
 
-No deployed infrastructure changes have been recorded in this repository yet.
+### 2026-09-14 — Home Assistant deployed on Proxmox
+
+- What changed: a new Home Assistant OS virtual machine was created from the checksum-verified official 18.2 KVM image and completed private web onboarding.
+- Scope / affected systems: HP EliteDesk Proxmox node and private HomeLab service access.
+- Verification: owner reported successful VM boot, web access, account creation, and automatic recognition of the TP-Link Archer router integration. Other smart-device discovery, versions, backups, Tailscale access, and sustained resource use remain unverified.
+- Documentation: [Home Assistant](docs/services/home-assistant.md) and [current state](CURRENT_STATE.md).
 
 ## Historical changes
 
