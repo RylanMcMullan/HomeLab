@@ -16,3 +16,7 @@ Tailscale runs as a subnet router inside a lightweight Proxmox LXC container. It
 ## Verification TODO
 
 Verify active route(s), reachability scope, update posture, least-privilege access policy, and recovery/maintenance process through owner-approved administration channels. Document only safe, non-secret conclusions.
+
+## Proposed placement; not deployed
+
+The [segmented target](../decisions/0003-segmented-services-and-remote-access.md) keeps this LXC in the Lab management VLAN. Before moving it, inspect actual advertised routes and tailnet grants, then verify remote administration to permitted destinations and denial to unrelated service VLANs. If its internet gateway depends on the proposed router VM, Tailscale access through this LXC is expected to stop during router-VM failure; local switch port 3 and a Proxmox console form the recovery path. Direct Tailscale clients in other guests would be separate, explicitly scoped tailnet members, not an automatic bridge between VLANs.

@@ -1,6 +1,6 @@
 # Network discovery and Home Assistant reachability runbook
 
-**Status:** initial discovery complete; remediation deferred. No router, firewall, route, VLAN, Proxmox bridge, Tailscale route, or Home Assistant interface change has been made for this work.
+**Status:** initial discovery complete; the [Archer-side IoT target](../decisions/0003-segmented-services-and-remote-access.md) is accepted but not implemented. No router, firewall, route, VLAN, Proxmox bridge, Tailscale route, or Home Assistant interface change has been made for this work.
 
 ## Verified observations
 
@@ -73,20 +73,21 @@ Classify every intended device before changing the network:
 - **Local multicast/broadcast:** mDNS, SSDP, HomeKit, and similar discovery generally require the same broadcast domain or an explicitly supported relay. A unicast route alone is insufficient.
 - **Radio-local:** Bluetooth, Zigbee, Z-Wave, Thread, or another radio requires appropriate hardware and placement rather than IP routing.
 
-## Phase 3: choose the least-privilege design
+## Phase 3: implement the accepted design in stages
 
-Evaluate solutions in this order:
+The accepted direction is to move compatible, owner-owned IoT devices onto the Archer's ordinary, non-client-isolated Wi-Fi with Home Assistant on the same Archer-side network. Begin with one device, verify discovery, control, state updates, and its internet access, then repeat in stages. Document exceptions for devices that cannot be moved or whose integrations need a different path. See the [segmentation worksheet](segmentation-plan.md) for the separate, still-theoretical Lab and service VLANs.
+
+For each integration, use the least access it requires:
 
 1. Configure the device's official Home Assistant integration manually when it supports a known host or cloud setup.
-2. Move only Home Assistant-managed IoT devices behind the Archer, subject to wireless coverage and isolation requirements.
-3. If the routers explicitly support it, design narrowly scoped inter-network routing and firewall rules for the required source, destinations, and ports. Separately confirm whether a supported mDNS/SSDP relay is needed.
-4. Consider changing router operating mode or adding a Home Assistant interface only as an architecture decision; either can weaken the existing boundary and requires a rollback plan.
+2. Confirm that the device and Home Assistant are on the intended Archer-side network, not an untested guest/client-isolated SSID.
+3. For an exception that remains upstream, investigate a documented integration-specific unicast route or supported discovery relay with narrowly scoped firewall rules. A route alone does not provide mDNS/SSDP discovery.
+4. Revisit router mode or an additional Home Assistant interface only through a new architecture decision and rollback plan; either can weaken the existing boundary.
 
-For the verified topology, the preferred paths are:
+Earlier alternatives, **not the selected implementation**, were:
 
-- **Without additional hardware:** move only the Home Assistant-managed IoT devices behind the Archer and verify that they are not placed in a client-isolated group. This preserves the household/HomeLab router boundary but requires re-onboarding each selected device.
 - **Keep IoT on the upstream network:** add a dedicated upstream network interface for the Home Assistant VM through a physically separate Proxmox NIC/bridge, preferably placing only the VM—not the Proxmox host management interface—on that network. This requires hardware/cabling and a separately reviewed Proxmox change.
-- **Managed-switch variant:** use an isolated switch VLAN to carry the upstream LAN to a second Home Assistant VM interface while keeping the Proxmox host unnumbered on that segment. This is a proposed architecture only; see [decision 0002](../decisions/0002-home-assistant-upstream-network-access.md). Exact VLAN and port assignments remain `UNKNOWN`.
+- **Managed-switch variant:** carry the upstream LAN to a second Home Assistant VM interface on an isolated switch VLAN. This was considered in [superseded decision 0002](../decisions/0002-home-assistant-upstream-network-access.md), not selected for the current target.
 
 Do not change the Archer to access-point mode merely to obtain discovery: doing so would collapse the documented HomeLab boundary. Do not dual-home an existing public-facing or general-purpose host as an improvised multicast relay.
 

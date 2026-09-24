@@ -22,7 +22,14 @@ Home Assistant OS is the preferred installation because it includes Supervisor a
 - The upstream gateway presents separate 2.4 GHz and 5 GHz Wi-Fi names. A Windows client comparison verified that both bands share the same private IPv4 network, gateway, DNS configuration, and DHCP behavior. Router-UI inspection verified that intra-BSS traffic blocking is disabled on both bands. The separate Archer routing/NAT boundary—not the radio band split—is therefore the leading network-level explanation for failed broadcast discovery; cross-band multicast behavior and individual device protocols remain unverified.
 - A Windows client behind the Archer successfully reached the upstream gateway by ICMP and HTTP. This supports the possibility of manually configured local-unicast integrations, but it does not verify reachability to any individual IoT device or make multicast-based discovery available.
 - Archer inspection found no exposed mDNS or SSDP relay control. Its enabled IGMP and wireless-multicast controls are not treated as equivalent to a service-discovery reflector. Full upstream discovery therefore requires moving selected devices behind the Archer or connecting the Home Assistant VM to the upstream LAN through a separately designed interface.
-- Residential IoT devices are reported on the upstream Zyxel household network while the deployed VM is behind the TP-Link HomeLab router. The owner reports that a phone on HomeLab Wi-Fi, with Bluetooth disabled, can currently control IoT devices on the upstream network. This verifies some application connectivity, but does not establish whether it is local or cloud-mediated and does not verify Home Assistant discovery, callbacks, mDNS, SSDP, or every vendor-local protocol. Initial cross-network discovery is complete and remediation is deferred; no routing, VLAN, multicast, or firewall change has been made. See the [network discovery runbook](../network/discovery-runbook.md) and [proposed architecture decision](../decisions/0002-home-assistant-upstream-network-access.md).
+- Residential IoT devices are reported on the upstream Zyxel household network while the deployed VM is behind the TP-Link HomeLab router. The owner reports that a phone on HomeLab Wi-Fi, with Bluetooth disabled, can currently control IoT devices on the upstream network. This verifies some application connectivity, but does not establish whether it is local or cloud-mediated and does not verify Home Assistant discovery, callbacks, mDNS, SSDP, or every vendor-local protocol. Initial cross-network discovery is complete; no routing, VLAN, multicast, or firewall change has been made. See the [network discovery runbook](../network/discovery-runbook.md). The earlier [upstream-IoT proposal](../decisions/0002-home-assistant-upstream-network-access.md) is superseded by [decision 0003](../decisions/0003-segmented-services-and-remote-access.md).
+
+## Accepted target; not deployed
+
+- Move compatible owner-owned IoT devices to the Archer's ordinary Wi-Fi one at a time and verify their actual Home Assistant integrations; document exceptions. Keep the Home Assistant VM on that Archer-side network for local discovery; it is the exception to the planned one-service-per-VLAN pattern. The Archer's guest or IoT SSID is not assumed to permit local discovery until tested.
+- Plan remote browser and companion-app access through an authenticated Cloudflare Tunnel route on the owner's future `iot` subdomain. Home Assistant Cloud is not required for this target, and no domain, route, or public Home Assistant access is configured yet.
+- Use unique credentials, MFA, updates, and a tested Home Assistant backup/restore. Verify any extra Cloudflare Access login against the companion app before adopting it.
+- Keep Proxmox and Lab administration off Home Assistant's published application route. The connector's location and exact firewall path remain `TODO`; the remote path should not depend on the proposed Lab router VM if it can be placed on the Archer side.
 
 ## Deployment procedure
 
@@ -44,6 +51,8 @@ Exact Proxmox commands must be generated only after confirming the unused VM ID,
 - [x] VM boots using Home Assistant OS and UEFI.
 - [x] Web onboarding is reachable privately and the owner account was created.
 - [ ] Required device discovery and integrations work across the intended network boundary.
+- [ ] One selected Archer Wi-Fi IoT device is discovered and controlled, with state updates verified.
+- [ ] Planned remote browser and companion-app path is authenticated and tested off-site after the tunnel is deployed.
 - [ ] Backup destination and restore procedure are verified.
 - [ ] Resource utilization is measured before changing allocations.
 

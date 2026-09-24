@@ -13,7 +13,7 @@
 ## Planned services
 
 - [Portfolio website](portfolio-website.md) — intended Proxmox-container workload; not deployed.
-- [Cloudflare Tunnel](cloudflare-tunnel.md) — intended public exposure path for the planned website; not deployed.
+- [Cloudflare Tunnel](cloudflare-tunnel.md) — planned reviewed access path for the website, Home Assistant, Nextcloud, and a later production vault; not deployed.
 - [Jellyfin](jellyfin.md) — future unprivileged Debian LXC; deferred until media storage is available.
 - [Nextcloud](nextcloud.md) — future Nextcloud AIO deployment in a Debian Docker VM; deferred until durable storage and backups are available.
 - [Uptime Kuma](uptime-kuma.md) — planned private availability monitoring; not deployed.
@@ -28,14 +28,14 @@
 | --- | --- | --- | --- |
 | Minecraft Java server | Publicly reachable through playit.gg | Tailscale | [Record](minecraft-java.md) |
 | Tailscale subnet router | Remote-access infrastructure; public endpoint details not documented | Owner-controlled Tailscale administration | [Record](tailscale.md) |
-| Portfolio website | Not deployed | `N/A` until deployed | [Planned record](portfolio-website.md) |
-| Cloudflare Tunnel | Not deployed | `N/A` until deployed | [Planned record](cloudflare-tunnel.md) |
-| Local AI service | Not deployed; host preparation in progress | Planned local console, LAN, and Tailscale access | [In-progress record](local-ai.md) |
-| Home Assistant | Private HomeLab access verified; public exposure not configured | Owner-created Home Assistant account; Tailscale path not yet verified | [Record](home-assistant.md) |
+| Portfolio website | Not deployed; planned public domain apex via Cloudflare Tunnel | Planned private Lab-origin administration | [Planned record](portfolio-website.md) |
+| Cloudflare Tunnel | Not deployed; multiple application routes planned | Connector and policy details `TODO` | [Planned record](cloudflare-tunnel.md) |
+| Local AI service | Not deployed; host preparation in progress | Planned local console and Lab administration; authenticated chat access without Tailscale is `TODO` | [In-progress record](local-ai.md) |
+| Home Assistant | Private HomeLab access verified; public exposure not configured; future `iot` subdomain planned | Owner-created Home Assistant account; Tailscale path not yet verified | [Record](home-assistant.md) |
 | Jellyfin | Not deployed | Planned LAN and Tailscale access | [Planned record](jellyfin.md) |
-| Nextcloud | Not deployed | Planned LAN and Tailscale access | [Planned record](nextcloud.md) |
+| Nextcloud | Not deployed; future `drive` subdomain planned after storage and recovery | Planned private Lab-origin administration | [Planned record](nextcloud.md) |
 | Uptime Kuma | Not deployed | Planned LAN and Tailscale access | [Planned record](uptime-kuma.md) |
 | Homepage | Not deployed | Planned LAN and Tailscale access | [Planned record](homepage.md) |
-| Password manager | Not deployed | Access design `UNKNOWN`; HTTPS and recovery required | [Planned record](password-manager.md) |
+| Password manager | Not deployed; future production vault on `pass` subdomain is planned | Planned private Lab-origin administration; HTTPS, MFA, and recovery required | [Planned record](password-manager.md) |
 | Kali Linux research VM | Not deployed | Planned private administration | [Planned record](kali-linux.md) |
 | Malware-analysis lab | Not deployed | Management and containment design `UNKNOWN` | [Planned record](malware-analysis-lab.md) |

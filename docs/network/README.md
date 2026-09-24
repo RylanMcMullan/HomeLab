@@ -2,6 +2,8 @@
 
 The primary network record is [Topology and components](topology.md). It describes the upstream household gateway, HomeLab boundary router, and managed switch without inventing addressing, VLANs, or port maps.
 
+The accepted but undeployed [VLAN and firewall worksheet](segmentation-plan.md) records theoretical segment IDs, candidate switch port roles, and verification gates. Do not treat it as the active switch configuration.
+
 | Topic | Authoritative record |
 | --- | --- |
 | Household-to-HomeLab boundary | [Topology](topology.md#network-boundary) |

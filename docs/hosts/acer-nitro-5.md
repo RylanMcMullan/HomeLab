@@ -37,6 +37,7 @@ The intended role is a dedicated, headed, 24/7 local AI server and HomeLab manag
 - Use a lightweight Linux graphical environment with a local browser for router, Proxmox, Home Assistant, and other management interfaces.
 - Remain available with the lid closed while turning off the built-in display appropriately; exact lid, suspend, external-display, airflow, and sustained-temperature behavior is `TODO` for the selected OS.
 - Support SSH administration plus a primarily web-based AI chat interface and API.
+- Use managed-switch port 3 as the proposed Lab management access port after VLAN migration. The owner reports the Acer on port 3; current VLAN membership is unverified. Provide authenticated AI chat access to approved local clients without requiring Tailscale, while keeping host administration and the inference API protected. The access/firewall design remains `TODO`.
 - Prioritize response quality while retaining useful interactive speed.
 - Support one primary user, at most two or three users, and up to approximately three owner-initiated processes. Actual safe concurrency remains `UNKNOWN` until model benchmarks are run.
 - Initial AI uses: light coding, automation, and cybersecurity research assistance.

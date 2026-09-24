@@ -1,6 +1,6 @@
 # 0002 — Home Assistant access to upstream IoT devices
 
-**Status:** Proposed  
+**Status:** Superseded by [decision 0003](0003-segmented-services-and-remote-access.md); not deployed
 **Date:** 2026-09-14
 
 ## Context
@@ -25,9 +25,9 @@ This may make upstream discovery possible while preserving the broader router bo
 
 Changing the HomeLab router to access-point mode would simplify discovery by placing systems on one network, but would remove the documented separation between household and HomeLab systems. This option is not preferred.
 
-## Proposed direction
+## Historical proposed direction
 
-No design has been accepted or deployed. When work resumes:
+This proposal was not deployed. The accepted target design moves compatible owner-owned IoT devices behind the Archer in stages and keeps Home Assistant on the same network for discovery. The following steps remain as historical alternatives if that move proves unsuitable:
 
 1. Inventory each intended IoT device and determine whether its official integration is cloud-based, local unicast, multicast/broadcast, or radio-local.
 2. Prefer manual, scoped integrations or moving selected devices behind the HomeLab router when practical.
@@ -36,7 +36,7 @@ No design has been accepted or deployed. When work resumes:
 
 ## Consequences
 
-- Cross-network Home Assistant discovery remains planned work, not current capability.
+- Cross-network Home Assistant discovery remains unverified and is not a current capability.
 - No VLAN ID, switch port assignment, bridge name, address, route, or firewall rule is selected here.
 - A managed-switch VLAN can carry a separate Layer 2 segment, but routing and security enforcement still require correctly configured endpoints or a firewall/router.
 - Any implementation must be owner-approved and documented only after it is verified.

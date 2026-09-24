@@ -12,6 +12,7 @@ Provide simple availability monitoring for selected HomeLab services, initially 
 - Consider a small private Debian utility guest shared with [Homepage](homepage.md); dedicated versus shared guest remains `UNKNOWN` until selected.
 - Prefer the project's official Docker image and a persistent local data volume. See the [official Uptime Kuma repository](https://github.com/louislam/uptime-kuma).
 - Keep the interface private to the HomeLab and/or Tailscale.
+- Place the administrative interface in the planned Lab management VLAN. Reach selected services and hosts across VLANs only through recorded health-check destinations and protocols; do not grant a blanket cross-VLAN rule. Whether to publish a sanitized status-only page is `TODO`.
 - Do not expose the Docker socket merely to monitor ordinary HTTP, TCP, ping, or DNS targets.
 - Suggested starting allocation for a shared lightweight utility guest: 1 vCPU, 1–2 GiB RAM, and a 16 GiB system disk. This is a planning estimate, not a verified requirement.
 
@@ -22,4 +23,5 @@ Provide simple availability monitoring for selected HomeLab services, initially 
 - [ ] Persistent data location and backup scope are documented.
 - [ ] Authentication and private reachability are verified.
 - [ ] At least one non-critical monitor is tested through a controlled failure and recovery.
+- [ ] Monitoring succeeds across approved VLAN paths while unrelated management paths remain blocked.
 - [ ] Resource use is measured before resizing.

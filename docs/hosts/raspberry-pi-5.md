@@ -21,6 +21,7 @@
 - Minecraft public reachability is provided by playit.gg.
 - Administrative access is performed through Tailscale. See [Tailscale](../services/tailscale.md).
 - Do not place playit.gg credentials or tokens in this repository.
+- The owner reports this host on managed-switch port 4. Its current VLAN/PVID and cable path are unverified. A separate game VLAN is only a [candidate](../network/segmentation-plan.md), subject to playit.gg and Tailscale testing.
 
 ## Inventory TODO
 

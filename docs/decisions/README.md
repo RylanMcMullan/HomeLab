@@ -5,7 +5,8 @@ Use this directory for major, durable decisions that affect topology, hosting, e
 ## Records
 
 - [0001 — Run Home Assistant OS in a dedicated Proxmox VM](0001-home-assistant-os-vm.md) — accepted and deployed; operational hardening remains planned.
-- [0002 — Home Assistant access to upstream IoT devices](0002-home-assistant-upstream-network-access.md) — proposed; no network change has been made.
+- [0002 — Home Assistant access to upstream IoT devices](0002-home-assistant-upstream-network-access.md) — superseded by the staged planned move of compatible owner-owned IoT devices to the Archer; no network change has been made.
+- [0003 — Segmented services and remote access](0003-segmented-services-and-remote-access.md) — accepted target design; implementation has not begun.
 
 ## Record format
 

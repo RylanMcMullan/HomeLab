@@ -9,6 +9,7 @@
 - Initial compute recommendation for light use: 2 vCPUs and 2 GiB RAM. Measure playback and transcoding before resizing.
 - Keep configuration/cache separate from media data so storage can be migrated later.
 - Keep initial access private to the HomeLab and Tailscale.
+- The planned NAS is the likely durable media source after capacity and permissions are verified. Its network segment and any cross-VLAN media path remain `TODO`; no public Jellyfin route is selected.
 
 ## Storage and transcoding constraints
 

@@ -7,6 +7,7 @@
 - Host: [Acer Nitro 5 AN515-54](../hosts/acer-nitro-5.md).
 - Availability: dedicated 24/7 node with a lightweight local graphical session.
 - Interfaces: local browser, private web interface, SSH administration, and an API for future integrations.
+- Network target: the Acer is owner-reported on wired switch port 3, proposed as an untagged Lab VLAN 20 access port. That placement separates the host from the Archer/IoT VLAN. For the initial network rollout, treat it only as a Lab node. Decide any AI chat access from other VLANs when the service is hosted; no such firewall exception is selected yet.
 - Users: primarily the owner, with at most two or three users; up to approximately three owner-initiated processes.
 - Priorities: model quality first, then useful interactive response speed.
 - Initial workloads: light coding, automation, and cybersecurity research assistance.
@@ -33,7 +34,7 @@ Specific model families and quantizations remain `TODO` until current candidates
 
 ## Security boundaries for future agentic use
 
-- Keep the chat UI, inference API, and management interfaces private to the local network and/or Tailscale unless a separate security review approves another exposure path.
+- Keep the inference API and host management interfaces on the private Lab path. When the AI service is hosted, decide whether a distinct authenticated chat-UI route for other clients is needed; a public Cloudflare route has not been approved. See the [segmentation decision](../decisions/0003-segmented-services-and-remote-access.md).
 - Separate research/chat capability from device actuation. The model should not receive unrestricted router, hypervisor, Home Assistant, camera, lock, alarm, or network-administration credentials.
 - Use a dedicated integration identity, least-privilege permissions, action allowlists, validation, audit logs, and explicit human approval for consequential actions.
 - Start Home Assistant integration read-only. Add narrowly scoped actions only after threat modeling and testing.
@@ -51,3 +52,4 @@ Specific model families and quantizations remain `TODO` until current candidates
 - [ ] Configure lid/display behavior without suspending the 24/7 service unintentionally.
 - [ ] Measure sustained CPU/GPU temperatures and verify unobstructed airflow before approving closed-lid inference.
 - [ ] Restrict and verify local/Tailscale access before enabling integrations.
+- [ ] At AI deployment, decide and test any approved non-Tailscale chat access while denying unrelated Lab and inference endpoints.

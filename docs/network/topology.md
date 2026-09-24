@@ -1,6 +1,6 @@
 # Topology and components
 
-**Status:** owner-provided current-state baseline. Internal subnets, IP addresses, DHCP scopes/reservations, VLANs, Wi-Fi details, port forwarding, firewall rules, and physical port assignments are `UNKNOWN` and intentionally omitted.
+**Status:** owner-provided current-state baseline. Internal subnets, IP addresses, DHCP scopes/reservations, VLAN memberships, Wi-Fi details, port forwarding, and firewall rules are `UNKNOWN` and intentionally omitted. Physical port roles below are owner-reported, not a verified cable trace.
 
 ## Network boundary
 
@@ -37,9 +37,9 @@ See [architecture overview](../architecture/overview.md) for the relationship di
 ## Managed switch
 
 - Device: TP-Link TL-SG108PE, 8-port managed switch.
-- VLAN configuration and individual port assignments: `UNKNOWN`.
-- Uplink, firmware, management address, connected-device map, link speeds, and PoE usage: `UNKNOWN`.
-- A dedicated VLAN could potentially extend the upstream LAN to a second Home Assistant interface, but this is only a design candidate. The switch cannot independently provide firewall policy or isolate wireless clients connected to the routers. See [decision 0002](../decisions/0002-home-assistant-upstream-network-access.md).
+- Owner-reported port map on 2026-09-24: port 1 = Archer LAN uplink, port 2 = HP EliteDesk, port 3 = Acer Nitro 5, port 4 = Raspberry Pi 5, and ports 5–8 = empty. This is not an independently verified cable trace.
+- VLAN/PVID configuration, firmware and hardware revision, management address, link speeds, and PoE usage: `UNKNOWN`.
+- The switch can carry planned segments but cannot independently provide their gateways or firewall policy. The proposed port and VLAN roles are in the [undeployed segmentation worksheet](segmentation-plan.md); the earlier upstream-IoT design in [decision 0002](../decisions/0002-home-assistant-upstream-network-access.md) was superseded.
 
 ## Inventory TODO
 

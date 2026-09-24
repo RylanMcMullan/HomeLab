@@ -12,6 +12,7 @@ Provide a private dashboard for links and selected status information from HomeL
 - Consider sharing a small private Debian utility guest with [Uptime Kuma](uptime-kuma.md); dedicated versus shared guest remains `UNKNOWN` until selected.
 - Use an installation method from the [official Homepage documentation](https://gethomepage.dev/installation/).
 - Keep the dashboard private to the HomeLab and/or Tailscale.
+- Place it in the planned Lab management VLAN. Add cross-VLAN widgets only through narrowly scoped, read-only API identities and allow only their required destinations and ports. See [decision 0003](../decisions/0003-segmented-services-and-remote-access.md).
 - Begin with links that require no API credentials. Add widgets only when their permissions and secret-storage method have been reviewed.
 
 ## Security and verification
@@ -22,4 +23,5 @@ Provide a private dashboard for links and selected status information from HomeL
 - [ ] Configuration persistence and backup scope are documented.
 - [ ] Private access is verified.
 - [ ] Links and optional widgets are tested without placing secrets in this repository.
+- [ ] Approved cross-VLAN widgets work without broad access to their service VLANs.
 - [ ] Resource use is measured before resizing.

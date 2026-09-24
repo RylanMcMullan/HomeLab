@@ -14,6 +14,8 @@ Planned consumers include:
 - [Password manager](../services/password-manager.md): encrypted backups and tested recovery artifacts, not an unprotected vault export.
 - Proxmox guests: backups with defined retention and restore tests.
 
+The owner intends to prioritize network-attached storage before data-heavy services such as Jellyfin and Nextcloud. The NAS is a candidate for both service data and local backups, subject to separate permissions and capacity planning. Keep another independent or off-site recovery copy for critical data; a single NAS failure must not erase both primary data and every backup. See the [segmentation decision](../decisions/0003-segmented-services-and-remote-access.md) for the optional storage VLAN and restricted cross-VLAN data/backup paths.
+
 ## Decisions still required
 
 - Hardware platform, drive count/type/capacity, filesystem, redundancy, and expansion strategy: `UNKNOWN`.
