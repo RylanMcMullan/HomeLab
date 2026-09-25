@@ -1,6 +1,6 @@
 # Current state
 
-> Scope: deployed infrastructure believed operational from the owner-provided bootstrap inventory. This is the authoritative snapshot of **current**, not planned, state. Last reviewed: 2026-09-24 for the owner-reported switch port map; other observations retain their original dates.
+> Scope: deployed infrastructure believed operational from the owner-provided bootstrap inventory. This is the authoritative snapshot of **current**, not planned, state. Last reviewed: 2026-09-25 for owner-reported HomeLab IoT disconnection; the switch port map remains owner-reported from 2026-09-24.
 
 ## Deployed infrastructure
 
@@ -12,7 +12,7 @@
 | Virtualization | An HP EliteDesk with an Intel Core i5-9500, 16 GB RAM, and internal NVMe storage runs Proxmox VE 9.2. It hosts the Tailscale LXC and a Home Assistant OS VM. | [Proxmox host](docs/hosts/proxmox-node.md) |
 | Raspberry Pi service host | Raspberry Pi 5 with external USB 3.0 SSD hosts a public Minecraft Java server. | [Raspberry Pi host](docs/hosts/raspberry-pi-5.md), [Minecraft](docs/services/minecraft-java.md) |
 | Remote administration | Tailscale is deployed as a subnet router in a lightweight Proxmox LXC and enables secure remote access to Proxmox management and internal HomeLab systems. | [Tailscale](docs/services/tailscale.md) |
-| Home automation | A new Home Assistant OS VM is running on Proxmox. Private web onboarding succeeded, and Home Assistant discovered the TP-Link Archer router integration. HomeLab-to-upstream unicast is verified, but cross-boundary IoT discovery remains incomplete. | [Home Assistant](docs/services/home-assistant.md) |
+| Home automation | A new Home Assistant OS VM is running on Proxmox. Private web onboarding succeeded, and Home Assistant discovered the TP-Link Archer router integration. On 2026-09-25 the owner reported all HomeLab IoT devices disconnected pending controlled testing; this has not been independently verified. No intended IoT device is verified in Home Assistant. HomeLab-to-upstream unicast is verified, but cross-boundary IoT discovery remains incomplete. | [Home Assistant](docs/services/home-assistant.md) |
 | Public exposure | The Minecraft Java server is publicly reachable through playit.gg. Administrative access uses Tailscale. | [Service exposure](docs/services/README.md#exposure-summary) |
 
 ## Explicitly not deployed

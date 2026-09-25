@@ -9,10 +9,10 @@
 | 10 | Archer / IoT / Home Assistant | Archer LAN and Wi-Fi, compatible owner-owned IoT devices after staged migration, Home Assistant VM, router VM uplink | Archer remains the gateway and DHCP server. Home Assistant may later have a narrowly scoped Cloudflare Tunnel route. |
 | 20 | Lab management | Proxmox management, Tailscale LXC, Acer on switch port 3, private Homepage and Uptime Kuma | Router VM gateway; no public management route. |
 | 30 | Portfolio | Dedicated website guest | Router VM gateway; planned public domain apex via Cloudflare Tunnel. |
-| 40 | Files | Dedicated Nextcloud guest | Router VM gateway; planned `drive` subdomain via Cloudflare Tunnel after storage and restore tests. |
-| 50 | Vault | Dedicated production password-manager guest | Router VM gateway; planned `pass` subdomain only after product, client, MFA, and recovery review. |
+| 40 | Files candidate | Nextcloud guest or NAS-hosted workload only if the NAS supports per-workload VLAN attachment | Router VM gateway; planned `drive` subdomain via Cloudflare Tunnel after storage and restore tests. |
+| 50 | Vault candidate | Production password-manager guest or separately isolated NAS-hosted workload | Router VM gateway; planned `pass` subdomain only after product, client, MFA, and recovery review. |
 | 60 | Minecraft/game candidate | Raspberry Pi on switch port 4, if the dedicated VLAN is accepted | Router VM gateway; playit.gg and Tailscale access require retesting. |
-| 70 | Storage candidate | Future NAS/backup infrastructure, if a dedicated storage segment is justified | Gateway, access pattern, and protections remain `TODO`. |
+| 70 | Storage candidate | Future NAS management/storage interface, if a dedicated storage segment is justified | Gateway, access pattern, and protections remain `TODO`; placing all NAS apps here would not isolate them from one another. |
 | 90 | Parking candidate | Unused switch ports only if disabling them is unavailable | No gateway or DHCP. Confirm switch behavior before use. |
 
 Do not reuse these IDs on real equipment until the switch's existing configuration, VLAN limits, PVID behavior, and any overlapping network have been inspected. The Archer's Wi-Fi clients are not individually VLAN-tagged: VLAN 10 would simply carry its existing LAN to the switch and Proxmox. VLAN IDs do not determine IP subnet numbers.
@@ -35,6 +35,7 @@ The reported connections, including the Archer LAN uplink on port 1, are not an 
 - The router VM would have an Archer-facing virtual NIC and one or more downstream tagged VLAN interfaces/NICs. It would supply DHCP, routing, internet NAT where required, and stateful firewall policy for downstream segments. Keep Archer DHCP confined to VLAN 10 and prevent downstream DHCP leakage.
 - Home Assistant would remain an Archer-side VM peer of migrated IoT devices for discovery. A separate Home Assistant VLAN is deferred until each required integration can be verified across a routed boundary.
 - Assign each future public service guest only to its own service VLAN; its management access must be a narrow Lab-origin rule, not a second unrestricted Lab NIC.
+- If future services run directly on a NAS, require product-specific proof that each workload can use an isolated tagged interface/network while NAS administration stays private. A simple untagged NAS port is one VLAN for the whole host. Defer the final Files/Vault/Storage layout until NAS selection.
 - Give Uptime Kuma selected health-check paths and Homepage selected read-only API paths from Lab. Confirm both successful checks and denied unrelated access.
 - Consider the Raspberry Pi's playit.gg outbound path and private administration separately before assigning VLAN 60.
 - Keep switch management reachable only on an approved management path if the hardware supports that policy; verify its recovery behavior before changing its management VLAN.
@@ -55,6 +56,6 @@ The reported connections, including the Archer LAN uplink on port 1, are not an 
 - HP NIC and Proxmox bridge state; router VM platform, resources, console access, and startup order.
 - Private CIDRs, DHCP scopes, DNS, reservations, firewall source/destination/port matrix, and recovery addresses, kept outside this public repository.
 - Actual IoT integration protocols; separate trusted Wi-Fi/AP decision. Defer the Acer AI web-access decision until the service is hosted.
-- Pi game VLAN decision; NAS placement and backup flows; Cloudflare connector location and native-client compatibility.
+- Pi game VLAN decision; NAS app/VM VLAN capabilities and backup flows; Cloudflare connector location and native-client compatibility.
 
 The [current topology](topology.md) and [current state](../../CURRENT_STATE.md) remain the deployed record. Update them only after each physical or network change has been verified.

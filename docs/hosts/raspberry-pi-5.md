@@ -7,6 +7,7 @@
 - Raspberry Pi 5.
 - 8 GB RAM.
 - External USB 3.0 SSD is used for the operating system and server environment.
+- The owner proposes using available capacity on this SSD for interim Minecraft backups until NAS storage exists. Capacity, backup separation, retention, and restore success are unverified; a same-SSD copy does not protect against drive failure.
 - Exact SSD make, model, capacity, filesystem, and health: `UNKNOWN`.
 
 ## Software and workloads
@@ -25,4 +26,4 @@
 
 ## Inventory TODO
 
-Verify the operating system and version, Minecraft server software/version, storage capacity and health, backup/recovery posture, and non-sensitive service-management details.
+Follow the ordered [Minecraft inventory](../services/minecraft-java.md#first-inventory-before-changes): host and storage health, exact server/Java/mod stack, process and update management, exposure/administration paths, and backup/restore. Keep raw outputs private.

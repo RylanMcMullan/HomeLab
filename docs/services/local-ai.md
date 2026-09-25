@@ -1,6 +1,6 @@
 # Local AI service
 
-**Status:** preparation in progress; not deployed. Hardware inventory is complete and selected Windows files are being preserved. No Linux operating system, runtime, model, web interface, or automation framework has been selected or installed.
+**Status:** preparation deferred until after Home Assistant, network security, and Minecraft priorities; not deployed. Hardware inventory is complete and selected Windows files still need preservation/verification before installation. No Linux operating system, runtime, model, web interface, or automation framework has been selected or installed.
 
 ## Intended service profile
 

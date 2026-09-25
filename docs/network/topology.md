@@ -6,7 +6,7 @@
 
 1. Metronet is the ISP.
 2. A Zyxel modem/router is the primary household gateway.
-3. Residential IoT devices are connected to the upstream household network managed by the Zyxel gateway.
+3. Household IoT devices have historically used the upstream Zyxel network. The owner reported all HomeLab IoT devices disconnected on 2026-09-25 pending controlled Home Assistant tests; per-device placement and independent verification remain `UNKNOWN`. Keep HomeLab IoT devices disconnected outside test windows until the security baseline is reviewed.
 4. The TP-Link Archer BE3500 HomeLab router connects from its WAN port to a LAN port on the Zyxel gateway.
 5. HomeLab wired and wireless devices operate behind the TP-Link router.
 
@@ -16,7 +16,7 @@ See [architecture overview](../architecture/overview.md) for the relationship di
 
 - Device: Zyxel modem/router; exact model, ISP handoff type, firmware, address, and configuration: `UNKNOWN`.
 - Role: primary household gateway.
-- Connected household IoT devices: present; inventory and connection details: `UNKNOWN`.
+- Household IoT inventory and present connection details: `UNKNOWN`.
 - The upstream gateway presents separate 2.4 GHz and 5 GHz Wi-Fi network names, with smart devices generally using 2.4 GHz and computers/phones generally using 5 GHz.
 - Command-verified from the same Windows client on 2026-09-14: both upstream bands use the same private IPv4 network, prefix length, default gateway, IPv4 DNS configuration, and DHCP state. This supports treating them as one Layer 3 network for inventory and unicast testing. Wireless client isolation and multicast/broadcast forwarding between the bands remain `UNKNOWN`.
 - Management-UI verified on 2026-09-14: the upstream gateway operates in router mode with DHCP and its firewall enabled; both wireless radios operate as access points; intra-BSS traffic blocking is disabled on both bands; and no user-defined static routes were shown.

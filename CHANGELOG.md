@@ -4,6 +4,13 @@ This changelog records significant infrastructure changes only. Documentation-on
 
 ## Unreleased
 
+### 2026-09-25 — HomeLab IoT devices disconnected for staged testing
+
+- What changed: the owner reported disconnecting all HomeLab IoT devices until controlled Home Assistant tests begin.
+- Scope / affected systems: HomeLab IoT device connectivity; no Home Assistant integration or router/VLAN change was verified.
+- Verification: owner report only; recheck device status privately before each test.
+- Documentation: [current state](CURRENT_STATE.md) and [Home Assistant](docs/services/home-assistant.md).
+
 ### 2026-09-14 — Home Assistant deployed on Proxmox
 
 - What changed: a new Home Assistant OS virtual machine was created from the checksum-verified official 18.2 KVM image and completed private web onboarding.

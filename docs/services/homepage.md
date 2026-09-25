@@ -8,12 +8,13 @@ Provide a private dashboard for links and selected status information from HomeL
 
 ## Proposed architecture
 
-- Deploy after the higher-priority AI-node migration or when the owner reprioritizes it.
+- Deploy after the initial Home Assistant, router-VM/VLAN, and Minecraft inventory work; the Acer AI conversion is later.
 - Consider sharing a small private Debian utility guest with [Uptime Kuma](uptime-kuma.md); dedicated versus shared guest remains `UNKNOWN` until selected.
 - Use an installation method from the [official Homepage documentation](https://gethomepage.dev/installation/).
-- Keep the dashboard private to the HomeLab and/or Tailscale.
+- Keep the dashboard private to authorized Lab and Tailscale clients. [MagicDNS](https://tailscale.com/docs/features/magicdns) or [Tailscale Serve](https://tailscale.com/docs/features/tailscale-serve) can provide named tailnet access after route, grant, and DNS verification. The owner's custom domain would require a separate private DNS/TLS design; a public DNS record alone does not make the dashboard private.
 - Place it in the planned Lab management VLAN. Add cross-VLAN widgets only through narrowly scoped, read-only API identities and allow only their required destinations and ports. See [decision 0003](../decisions/0003-segmented-services-and-remote-access.md).
 - Begin with links that require no API credentials. Add widgets only when their permissions and secret-storage method have been reviewed.
+- Link to the separately authenticated Minecraft management panel after its migration is verified; Homepage is not the panel itself.
 
 ## Security and verification
 

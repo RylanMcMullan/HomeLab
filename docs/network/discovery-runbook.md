@@ -1,6 +1,6 @@
 # Network discovery and Home Assistant reachability runbook
 
-**Status:** initial discovery complete; the [Archer-side IoT target](../decisions/0003-segmented-services-and-remote-access.md) is accepted but not implemented. No router, firewall, route, VLAN, Proxmox bridge, Tailscale route, or Home Assistant interface change has been made for this work.
+**Status:** initial discovery complete; the [Archer-side IoT target](../decisions/0003-segmented-services-and-remote-access.md) is accepted but not implemented. On 2026-09-25 the owner reported all HomeLab IoT devices disconnected pending controlled tests. No router, firewall, route, VLAN, Proxmox bridge, Tailscale route, or Home Assistant interface change has been made for this work.
 
 ## Verified observations
 
@@ -75,7 +75,7 @@ Classify every intended device before changing the network:
 
 ## Phase 3: implement the accepted design in stages
 
-The accepted direction is to move compatible, owner-owned IoT devices onto the Archer's ordinary, non-client-isolated Wi-Fi with Home Assistant on the same Archer-side network. Begin with one device, verify discovery, control, state updates, and its internet access, then repeat in stages. Document exceptions for devices that cannot be moved or whose integrations need a different path. See the [segmentation worksheet](segmentation-plan.md) for the separate, still-theoretical Lab and service VLANs.
+The accepted direction is to connect compatible, owner-owned IoT devices to the Archer's ordinary, non-client-isolated Wi-Fi with Home Assistant on the same Archer-side network. First recheck disconnection outside the test window, back up Home Assistant, and select a rollback path. Begin with one device, verify its expected control method, state updates, and internet access, then disconnect it if the test fails. Keep other devices disconnected until their individual tests. Document exceptions for devices whose integrations need a different path. After the room-device tests, prioritize the router VM and firewall baseline in the [segmentation worksheet](segmentation-plan.md).
 
 For each integration, use the least access it requires:
 

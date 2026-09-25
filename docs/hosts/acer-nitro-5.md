@@ -1,6 +1,6 @@
 # Acer Nitro 5 AN515-54
 
-**Status:** conversion to a dedicated HomeLab AI server is **in progress**, currently gated on preserving selected Windows files. Linux and the AI service are not deployed.
+**Status:** conversion to a dedicated HomeLab AI server is deferred behind the Home Assistant, network security, and Minecraft priorities. It remains gated on preserving selected Windows files. Linux and the AI service are not deployed.
 
 > Discovery boundary: the personal laptop used to maintain this repository is a separate computer, not this Acer node. Do not attribute local workstation inventory to the Acer.
 
@@ -44,7 +44,7 @@ The intended role is a dedicated, headed, 24/7 local AI server and HomeLab manag
 - Future uses: carefully controlled smart-home assistance and physical I/O through Raspberry Pi-connected speakers, microphones, cameras, or other devices.
 - Both internal drives may be erased after the owner completes and verifies a private backup.
 
-The planned memory upgrade is up to 32 GiB. Platform selection, migration, AI runtime, models, deployment, and verification remain [roadmap work](../../ROADMAP.md). See the [in-progress local AI service](../services/local-ai.md).
+The planned memory upgrade is up to 32 GiB. Platform selection, migration, AI runtime, models, deployment, and verification remain [roadmap work](../../ROADMAP.md). See the [deferred local AI service](../services/local-ai.md).
 
 ## Pre-install backup checklist
 

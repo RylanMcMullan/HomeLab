@@ -4,22 +4,35 @@
 
 ## In progress — next up
 
-- [ ] Make Home Assistant work with one owner-selected IoT device on the Archer network.
+- [ ] Establish Home Assistant control of the selected room devices, one device at a time.
+  - [x] Owner reported all HomeLab IoT devices disconnected on 2026-09-25, pending controlled tests; independent verification remains open.
+  - [ ] Recheck disconnection before each test and keep devices disconnected outside explicitly controlled test windows.
+  - [ ] Back up Home Assistant, verify updates and recovery access, and review Archer Wi-Fi isolation and management exposure before reconnecting a test device.
+  - [ ] Review Proxmox and Home Assistant host/service firewalls and management authentication for the temporary shared-Archer-LAN test; end each test window by disconnecting the IoT device until the router-VM baseline is verified.
   - [ ] Record the device's integration and discovery method privately; keep credentials and identifiers out of Git.
-  - [ ] Move or onboard one device to the Archer's ordinary Wi-Fi only after confirming its connectivity and rollback path.
-  - [ ] Verify discovery, control, state updates, internet access, and the Home Assistant app before moving additional devices.
+  - [ ] Connect one device to the Archer's ordinary Wi-Fi only after confirming its connectivity and rollback path; disconnect it again if the test fails.
+  - [ ] Verify control, state updates, internet access, the Home Assistant app, and the intended local/cloud path before connecting additional devices.
+  - [ ] First candidate: test one Govee H5083 smart plug through the researched Govee cloud/API integration path; Bluetooth passthrough is not required for that model.
+  - [ ] Next: test one Feit G30/E26 smart bulb for Smart Life/Tuya enrollment before considering any device-specific local-control route. Do not reset or connect the other two bulbs until the first test succeeds.
+  - [ ] Identify the desk lamp's RGB bulb by exact model, app, and radio/network protocol before selecting an integration.
 
-- [ ] Convert the Acer Nitro 5 (AN515-54) into a headed, 24/7 Linux AI node.
-  - [x] Collect and review the pre-install hardware inventory.
-  - [ ] Finish preserving and opening the selected Windows files that must survive the migration.
-  - [ ] Select and install the Linux operating system without erasing the secondary HDD until its retained data is reviewed.
-  - [ ] Configure the lightweight desktop, local management browser, SSH, Tailscale, updates, and safe 24/7 lid/display behavior.
-  - [ ] Install and verify the NVIDIA driver and local AI runtime.
-  - [ ] Deploy a private web chat interface and local API.
-  - [ ] Benchmark candidate models for coding, automation, quality, latency, context size, and safe concurrency.
-  - [ ] Upgrade memory up to the planned 32 GiB and re-run capacity tests.
-  - [ ] Verify sustained temperature, airflow, recovery, and private access before declaring the node operational.
-  - [ ] When the AI service is hosted, decide whether and how approved clients should reach its web UI without Tailscale. Keep host administration and the inference API private; authentication, firewall, and Wi-Fi trust-zone details remain `TODO`.
+- [ ] Immediately after the Home Assistant/IoT test, build and verify the router VM and staged VLAN security baseline.
+  - [ ] First inventory: trace switch ports and current VLAN/PVIDs; identify the switch revision/firmware, HP NIC and Proxmox bridges, Archer uplink/DHCP, current Tailscale routes/grants, and a local Proxmox recovery path. Keep exact addresses and credentials private.
+  - [ ] Back up switch and Proxmox network settings; test one downstream VLAN and one port before moving management.
+  - [ ] Verify DHCP, DNS, internet, default-deny inter-VLAN rules, allowed administrative paths, and recovery during router-VM failure.
+  - [ ] Move Lab management and Tailscale only after local recovery works; verify approved remote administration and denial from untrusted zones.
+  - [ ] Decide whether the Raspberry Pi needs a game VLAN after its service inventory, then retest playit.gg and Tailscale if moved.
+
+- [ ] Inventory, back up, and harden the Raspberry Pi Minecraft service before performance changes or web-panel migration.
+  - [ ] Inventory first: Pi OS/kernel, Minecraft edition/version/distribution, Java runtime, start/stop supervisor, user and file permissions, world/mod/plugin list, configuration, storage capacity/health, CPU/RAM/temperature under load, logs, update process, and playit.gg/Tailscale paths. Keep identifiers, credentials, and raw logs private.
+  - [ ] Use the existing Pi USB SSD as an interim backup destination only after confirming free space, backup separation from live worlds, retention, and a representative restore; add an independent copy as soon as practical.
+  - [ ] Choose a private Minecraft management web panel after inventory; evaluate Crafty Controller against the current server and migration/rollback requirements.
+  - [ ] Establish baseline performance and a tested backup before changing server settings or software.
+
+- [ ] Deploy a private management dashboard and monitoring after the network and Minecraft baseline.
+  - [ ] Deploy Uptime Kuma for selected health checks and Homepage for links/status, or justify a smaller alternative after the target inventory.
+  - [ ] Keep administration restricted to the Lab and authorized Tailscale clients; test tailnet grants plus firewall rules for each service.
+  - [ ] Use MagicDNS/Tailscale Serve as the first named browser access path. Evaluate private DNS under the owner's domain separately; do not create a public DNS route to management pages.
 
 ## Planned — dependency ordered
 
@@ -29,51 +42,51 @@
   - [ ] Verify remaining host models, software versions, storage health, backups, and restore procedures.
   - [ ] Record only sanitized, durable results in public documentation.
 
-- [ ] Finish Home Assistant integration and operational hardening.
+- [ ] Finish Home Assistant operational hardening.
   - [x] Deploy Home Assistant OS in a private Proxmox VM and complete onboarding.
   - [ ] Verify Home Assistant OS, Core, and Supervisor versions.
   - [x] Privately map both network zones and verify the relevant router capabilities.
-  - [ ] Inventory intended smart-device brands, models, apps, and integration protocols.
-  - [x] Select the target network design: keep Home Assistant with compatible, owner-owned Archer Wi-Fi IoT devices for local discovery; see [decision 0003](docs/decisions/0003-segmented-services-and-remote-access.md). The move is not deployed.
-  - [ ] Verify IoT devices one at a time, record any that cannot move, then decide whether an exception needs a narrower routed path.
+  - [ ] Complete the [candidate-device inventory](docs/services/home-assistant.md#candidate-device-inventory-and-integration-research) and verify actual integrations only during controlled tests.
+  - [x] Select the target network design: test Home Assistant with compatible, owner-owned Archer Wi-Fi IoT devices for local discovery; see [decision 0003](docs/decisions/0003-segmented-services-and-remote-access.md). Staged onboarding is not deployed.
+  - [ ] Verify IoT devices one at a time, record any that cannot use the selected network/integration, then decide whether an exception needs a narrower routed path.
   - [ ] After domain and tunnel setup, test authenticated browser and companion-app access through the planned Home Assistant subdomain without exposing Proxmox management.
   - [ ] Verify Tailscale access, backups, restore procedure, updates, and resource utilization.
   - [ ] Review the upstream gateway's security lifecycle, ISP support, wireless compatibility, and replacement options without publishing its exact firmware or identifiers.
 
-- [ ] Stage the [theoretical VLAN and firewall plan](docs/network/segmentation-plan.md) using the managed switch and a Proxmox router VM.
-  - [ ] Verify the owner-reported switch map (1 Archer LAN uplink, 2 HP, 3 Acer, 4 Pi, 5–8 empty), switch revision/configuration, HP bridge, and local recovery path. Proposed VLAN IDs are not live settings.
-  - [ ] Back up switch and Proxmox network configuration; test one downstream VLAN and one port before moving management.
-  - [ ] Verify DHCP, internet, default-deny inter-VLAN rules, port 3 local Proxmox recovery, and expected router-VM outage behavior.
-  - [ ] Move Lab management and Tailscale only after the recovery path works; review advertised routes and tailnet grants.
-  - [ ] Decide whether the Raspberry Pi needs its own game VLAN; preserve and retest playit.gg public reachability and Tailscale administration.
-  - [ ] Define narrowly scoped Uptime Kuma checks and Homepage read-only API access across VLANs.
-  - [ ] Keep the Acer on the Lab VLAN without an AI-specific cross-VLAN rule during the initial network rollout; revisit AI web access when the service is hosted.
+- [ ] Refine the [theoretical VLAN and firewall worksheet](docs/network/segmentation-plan.md) from measured service paths after the staged router-VM rollout; proposed VLAN IDs are not live settings.
 
 - [ ] Add dedicated network storage and a tested backup foundation.
   - [ ] Define capacity, performance, redundancy, growth, power, and budget requirements.
   - [ ] Select storage hardware and protocol without assuming that RAID replaces backup.
   - [ ] Define backup destinations, retention, recovery objectives, and restore tests.
-  - [ ] Decide whether the NAS needs a dedicated storage VLAN and specify service-by-service shares and backup flows.
+  - [ ] Evaluate whether the chosen NAS can attach separate VMs/apps to tagged VLANs while keeping its management interface private; decide per-service placement and firewall paths before purchase.
+  - [ ] Decide whether the NAS needs a dedicated storage VLAN and specify service-by-service shares and backup flows. One untagged switch port/VLAN isolates the NAS as a whole, not the apps within it.
   - [ ] Keep an independent or off-site copy of critical data; the NAS must not be the only recovery copy.
   - [ ] Use the larger storage pool for AI data only after access, backup, and performance are verified.
 
-- [ ] Deploy lightweight private utility services.
-  - [ ] Decide whether Uptime Kuma and Homepage should share a small Debian utility guest or use separate guests.
-  - [ ] Deploy and verify Uptime Kuma for availability monitoring.
-  - [ ] Deploy and verify Homepage as the private service dashboard.
-  - [ ] Back up required state and keep both interfaces private to the HomeLab and/or Tailscale.
-  - [ ] Permit only selected health checks and read-only widget APIs across VLANs; verify unrelated paths are blocked.
+- [ ] Convert the Acer Nitro 5 (AN515-54) into a headed, 24/7 Linux AI node after the security and Minecraft work; preserve the [existing preparation and verification gates](docs/services/local-ai.md).
+  - [x] Collect and review the pre-install hardware inventory.
+  - [ ] Finish preserving and opening the selected Windows files that must survive the migration before erasing either drive.
+  - [ ] Install and harden Linux, SSH, Tailscale, the local AI runtime, and a private chat interface; benchmark models, upgrade RAM if needed, and verify cooling and recovery.
 
-### Storage-backed applications
+### NAS-backed applications
 
 - [ ] Deploy Jellyfin after dedicated media storage is available.
+  - [ ] Decide whether to run its application on the NAS or on a separate compute guest using NAS media storage; choose network access from actual NAS capabilities.
   - [ ] Define media capacity, permissions, backup scope, direct-play clients, and transcoding requirements.
   - [ ] Verify Intel hardware acceleration before representing it as enabled.
 
 - [ ] Deploy Nextcloud after durable data storage and backups are available.
+  - [ ] Decide whether to run Nextcloud on the NAS or a separate guest using NAS storage; require independently recoverable application/database data and tested client access.
   - [ ] Define users, capacity, sync clients, TLS, recovery objectives, and restore testing.
   - [ ] Store non-critical test data until recovery is verified.
-  - [ ] Place the service on its own planned VLAN, then test its Cloudflare-hosted HTTPS subdomain, browser MFA, desktop/mobile sync, and any client app passwords.
+  - [ ] Select a separate Files network if the host can enforce it, then test its Cloudflare-hosted HTTPS subdomain, browser MFA, desktop/mobile sync, and any client app passwords.
+
+- [ ] Deploy production Bitwarden in the NAS implementation phase, only after reliable backup and recovery exist.
+  - [ ] Revisit NAS application support, isolation, authentication, and recovery when selecting the Bitwarden variant and host; keep it separate from the educational prototype.
+  - [ ] Compare official Bitwarden Lite and standard Bitwarden for the owner's required browser-extension/mobile clients and NAS platform.
+  - [ ] Select a separate Vault network if the host can enforce it, and define HTTPS, remote app access, MFA, update, emergency-access, export, and restore requirements.
+  - [ ] Complete a tested restore before making it the sole copy of any credential.
 
 ### Publishing
 
@@ -84,20 +97,17 @@
 
 - [ ] Establish the owner's domain and use Cloudflare Tunnel for separately reviewed public applications.
   - [ ] Configure each tunnel route only after its origin service exists, is hardened, and has a tested recovery path.
-  - [ ] Plan the domain apex for the portfolio and separate subdomains for Home Assistant, Nextcloud, and the later production password manager; exact domain and DNS values remain unconfigured.
+  - [ ] Plan the domain apex for the portfolio and separate subdomains for selected user-facing applications; management dashboards and the Minecraft web panel remain tailnet-only. Exact domain and DNS values remain unconfigured.
+  - [ ] Evaluate whether Jellyfin needs a public browser route after its client, authentication, and streaming requirements are known.
   - [ ] Test application authentication/MFA and native client compatibility before adding Cloudflare Access to any route.
   - [ ] Keep tunnel connectors and their origin reachability narrowly scoped; never publish management interfaces or tunnel credentials.
 
-### Later sensitive and experimental work
+### Tentative and eventual projects — unscheduled
 
-- [ ] Deploy a production self-hosted password manager only after reliable backup and recovery exist.
-  - [ ] Compare official Bitwarden Lite, standard Bitwarden, and other reviewed candidates with supported browser-extension/mobile clients.
-  - [ ] Place it in its own planned VLAN and define HTTPS, remote app access, MFA, update, emergency-access, export, and restore requirements.
-  - [ ] Complete a tested restore before making it the sole copy of any credential.
-
-- [ ] Explore a separate educational password-manager implementation.
-  - [ ] Use synthetic test data only; do not store real credentials or use it as the production vault.
-  - [ ] Keep its deployment and access design separate from the selected maintained production manager.
+- [ ] Evaluate the Xbox Series X, Roku Stick 4K, Roku TV, Echo Dot, and Spotify as optional Home Assistant integrations after the room devices and network baseline; research is in the [Home Assistant inventory](docs/services/home-assistant.md#candidate-device-inventory-and-integration-research).
+- [ ] Explore a separate educational password-manager implementation after most infrastructure work.
+  - [ ] Use synthetic test data only; never use it as the production vault.
+  - [ ] Decide its hosting and access independently of the selected maintained password manager.
 
 ### Authorized security research
 
@@ -113,7 +123,7 @@
 
 ## Blocked
 
-No project is formally blocked. The AI-node installation is gated on completion of the owner's selective file preservation. Nextcloud, Jellyfin, and the production password manager remain gated on appropriate storage, backup, and tested recovery. VLAN migration is gated on a verified port map and local Proxmox recovery path.
+No project is formally blocked. IoT testing is gated on rechecking disconnection outside test windows and on a Home Assistant backup. VLAN migration is gated on a verified port map, configuration backups, and local Proxmox recovery. The AI-node installation is gated on completion of the owner's selective file preservation. NAS-backed applications and production Bitwarden are gated on appropriate storage, isolation, backup, and tested recovery.
 
 ## Completed
 

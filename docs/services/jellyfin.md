@@ -4,12 +4,12 @@
 
 ## Proposed architecture
 
-- Run Jellyfin in a dedicated, unprivileged Debian LXC to minimize overhead.
+- Candidate placements are a dedicated unprivileged Debian LXC using NAS media storage or an isolated NAS-hosted app/VM if the selected NAS supports it. Decide after NAS platform, transcoding, backup, and network capabilities are known.
 - Prefer Jellyfin's official Debian/Ubuntu packaging or official container image; do not run an unaudited third-party installer. See the [official Linux installation guide](https://jellyfin.org/docs/general/installation/linux/) and [official container documentation](https://jellyfin.org/docs/general/installation/container/).
 - Initial compute recommendation for light use: 2 vCPUs and 2 GiB RAM. Measure playback and transcoding before resizing.
 - Keep configuration/cache separate from media data so storage can be migrated later.
-- Keep initial access private to the HomeLab and Tailscale.
-- The planned NAS is the likely durable media source after capacity and permissions are verified. Its network segment and any cross-VLAN media path remain `TODO`; no public Jellyfin route is selected.
+- Keep initial access private to the HomeLab and Tailscale. The owner wants to evaluate later browser access through a public-facing domain; the route, authentication, client behavior, and exposure policy remain `TODO` until the service and storage are tested.
+- The planned NAS is the likely durable media source after capacity and permissions are verified. Its application host, network segment, any cross-VLAN media path, and public route remain `TODO`.
 
 ## Storage and transcoding constraints
 
