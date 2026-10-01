@@ -7,6 +7,8 @@
 
 **2026-09-30 state update:** The reported state was that intended smart devices were powered on behind the Archer. This superseded the prior disconnected-device test gate; exact client matches and Home Assistant compatibility still required inventory before the router-VM build. The shared Archer LAN did not isolate IoT from Lab management.
 
+**2026-10-01 planning update:** The operator accepted one NAS service/storage VLAN as the starting design if a selected NAS cannot provide supported per-workload VLAN assignment. This is a deliberate exception to separate Files/Vault VLANs for NAS-hosted services, not a claim of equivalent isolation. Separate application authentication, Docker networks, storage permissions, host firewall rules, backup scopes, and private NAS administration remain required. Files and Vault VLAN candidates remain available for services hosted as distinct Proxmox guests or on a future NAS with verified tagged guest networking. No NAS, VLAN, or public route is deployed by this update.
+
 ## Context
 
 The intended design lets Home Assistant discover Wi-Fi IoT devices, separates Lab administration from public applications, uses the managed switch and Proxmox for VLAN experience, and permits selected applications from a phone or laptop without requiring Tailscale. The TP-Link Archer BE3500 provides a single HomeLab LAN and Wi-Fi network; general-purpose routed LAN VLANs have not been verified on it. The TL-SG108PE can carry 802.1Q VLANs, but does not provide their gateways or firewall policy.
@@ -59,7 +61,7 @@ If the router VM is unavailable, Archer Wi-Fi and Home Assistant should continue
 - Whether and how to provide non-Tailscale access to a future Acer AI web UI without exposing Lab management or the inference API, including how trusted Wi-Fi clients would be distinguished from IoT devices: deferred until AI hosting.
 - Switch management-plane placement in Lab, if the switch supports it, and emergency recovery access: `TODO`.
 - Cloudflare connector placement, per-service tunnel design, authentication/Access compatibility with native apps, domain registration, and exact hostnames: `TODO`.
-- NAS hardware, ability to assign distinct app/VM network interfaces to VLANs, private management interface, storage VLAN, permissions, backup retention, independent copy, and restore process: `TODO`. A single access-VLAN switch port isolates the NAS as one host, not its co-resident services.
+- NAS hardware, ability to assign distinct app/VM network interfaces to VLANs, private management rules, storage/service VLAN, permissions, backup retention, independent copy, and restore process: `TODO`. A single access-VLAN switch port isolates the NAS as one host, not its co-resident services; the shared NAS VLAN is the initial design candidate under the dated update above.
 - VLAN-aware Wi-Fi access point and a distinct trusted-client wireless network: optional future design; not selected.
 
 ## Related documentation

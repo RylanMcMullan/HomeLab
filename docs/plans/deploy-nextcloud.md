@@ -4,7 +4,7 @@
 
 ## Proposed architecture
 
-- Candidate placements are a small Debian VM with Docker Engine and Nextcloud All-in-One (AIO), or a separately isolated NAS-hosted workload if the chosen NAS supports AIO, persistent data, backups, and per-service network boundaries. Final placement is `TODO`.
+- Candidate placements are a small Debian VM with Docker Engine and Nextcloud All-in-One (AIO), or a NAS-hosted workload if the chosen NAS supports AIO, persistent data, backups, and the shared NAS VLAN controls. Final placement is `TODO`.
 - If using Proxmox, prefer a VM over Docker nested inside LXC; Nextcloud AIO recommends KVM or a non-virtualized host for best compatibility.
 - Initial compute estimate for a small VM deployment: 2 vCPUs and 4 GiB RAM, subject to optional AIO components and measured use. NAS-hosted capacity is `UNKNOWN`.
 - Keep application/database data separate from bulk files in the backup and restore plan, regardless of host.
@@ -20,6 +20,7 @@ See the [official Nextcloud AIO repository](https://github.com/nextcloud/all-in-
 - A durable deployment requires an owner-approved data location, backup destination, retention policy, and tested restore process.
 - The planned NAS may hold primary data and local backups under separate permissions, but an independent recovery copy of critical data is still required.
 - Optional AIO components such as office, antivirus, full-text search, Talk, and recording increase resource requirements and should remain disabled unless needed.
+- On a NAS, verify AIO's Docker-socket access, container orchestration, SSD-backed application/database volumes, HDD data path, backup scope, and upgrade behavior before accepting direct hosting. [AIO's own Cloudflare notes](https://github.com/nextcloud/all-in-one#notes-on-cloudflare-proxytunnel) identify upload size, timeout, domain-validation, and local access constraints; test representative large-file sync through the proposed public route.
 
 ## Verification checklist
 
