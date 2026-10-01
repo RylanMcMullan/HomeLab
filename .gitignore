@@ -36,3 +36,9 @@ logs/
 output/
 inventory-output/
 *.inventory.txt
+
+# Defense in depth: private operational artifacts belong outside this checkout.
+*.private.*
+*.pcap
+*.pcapng
+*.har

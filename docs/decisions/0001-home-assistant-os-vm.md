@@ -5,7 +5,7 @@
 
 ## Context
 
-The owner wants a first Home Assistant installation that gives the existing Proxmox node a useful 24/7 automation workload. The installation should be approachable for a first-time Home Assistant user, remain private during initial setup, and preserve access to Home Assistant's managed apps and update experience.
+At decision time, the goal was a first Home Assistant installation that gave the existing Proxmox node a useful 24/7 automation workload. It needed to be approachable for a first-time user, remain private during initial setup, and preserve Home Assistant's managed apps and update experience.
 
 The Proxmox host has sufficient verified idle CPU and memory capacity for the documented Home Assistant VM starting allocation. Its internal-only storage and lack of a verified backup target remain constraints.
 
@@ -26,6 +26,6 @@ Start with 2 vCPUs, 2 GiB RAM, the image's 32 GiB virtual disk, UEFI/OVMF firmwa
 ## Related documentation
 
 - [Home Assistant service record](../services/home-assistant.md)
-- [Proxmox host](../hosts/proxmox-node.md)
+- [HP EliteDesk](../hosts/hp-elitedesk.md) and [Proxmox VE](../services/proxmox-ve.md)
 - [Network topology](../network/topology.md)
 - [Roadmap](../../ROADMAP.md)

@@ -1,12 +1,14 @@
-# Proposed VLAN and firewall worksheet
+# Segment HomeLab Network
 
-**Status:** theoretical target only; no VLAN, port membership, router VM, or firewall rule below is deployed. The IDs are working labels for review, not approved device configuration. See [decision 0003](../decisions/0003-segmented-services-and-remote-access.md) for the accepted architecture and rollout gates.
+**Status:** Planned. No VLAN, port membership, router VM, or firewall rule below is deployed. The IDs are working labels for review, not approved device configuration. See [decision 0003](../decisions/0003-segmented-services-and-remote-access.md) for the accepted architecture and rollout gates.
+
+**Dependency:** Complete initial room-device tests under [Onboard Home Assistant](onboard-home-assistant.md). Related: [Harden Minecraft Server](harden-minecraft-server.md) for any later Pi game-VLAN move; [Establish NAS Storage](establish-nas-storage.md) for NAS placement.
 
 ## Proposed segments
 
 | Working VLAN ID | Role | Intended members | Gateway and exposure |
 | --- | --- | --- | --- |
-| 10 | Archer / IoT / Home Assistant | Archer LAN and Wi-Fi, compatible owner-owned IoT devices after staged migration, Home Assistant VM, router VM uplink | Archer remains the gateway and DHCP server. Home Assistant may later have a narrowly scoped Cloudflare Tunnel route. |
+| 10 | Archer / IoT / Home Assistant | Archer LAN and Wi-Fi, reported smart devices pending full inventory, Home Assistant VM, router VM uplink | Archer remains the gateway and DHCP server. Home Assistant may later have a narrowly scoped Cloudflare Tunnel route. |
 | 20 | Lab management | Proxmox management, Tailscale LXC, Acer on switch port 3, private Homepage and Uptime Kuma | Router VM gateway; no public management route. |
 | 30 | Portfolio | Dedicated website guest | Router VM gateway; planned public domain apex via Cloudflare Tunnel. |
 | 40 | Files candidate | Nextcloud guest or NAS-hosted workload only if the NAS supports per-workload VLAN attachment | Router VM gateway; planned `drive` subdomain via Cloudflare Tunnel after storage and restore tests. |
@@ -17,9 +19,9 @@
 
 Do not reuse these IDs on real equipment until the switch's existing configuration, VLAN limits, PVID behavior, and any overlapping network have been inspected. The Archer's Wi-Fi clients are not individually VLAN-tagged: VLAN 10 would simply carry its existing LAN to the switch and Proxmox. VLAN IDs do not determine IP subnet numbers.
 
-## Owner-reported switch port map and candidate port roles
+## Reported switch port map and candidate port roles
 
-| Switch port | Owner-reported connection | Candidate role after staged migration |
+| Switch port | Reported connection | Candidate role after staged migration |
 | --- | --- | --- |
 | 1 | Archer LAN uplink | Candidate untagged VLAN 10 / PVID 10. Do not change until the cable is traced and existing switch settings are backed up. |
 | 2 | HP EliteDesk / Proxmox | One trunk: untagged VLAN 10 for the Archer-facing path, tagged VLANs 20/30/40/50 and any later accepted 60/70. PVID/native behavior must match Proxmox. |
@@ -33,7 +35,7 @@ The reported connections, including the Archer LAN uplink on port 1, are not an 
 
 - Proxmox would use a VLAN-aware bridge on the switch-facing NIC. Its own management address belongs only to the Lab VLAN after migration. Its current bridge, NIC, and management placement remain `UNKNOWN` and must be inspected first.
 - The router VM would have an Archer-facing virtual NIC and one or more downstream tagged VLAN interfaces/NICs. It would supply DHCP, routing, internet NAT where required, and stateful firewall policy for downstream segments. Keep Archer DHCP confined to VLAN 10 and prevent downstream DHCP leakage.
-- Home Assistant would remain an Archer-side VM peer of migrated IoT devices for discovery. A separate Home Assistant VLAN is deferred until each required integration can be verified across a routed boundary.
+- Home Assistant would remain an Archer-side VM peer of the inventoried IoT devices for discovery. A separate Home Assistant VLAN is deferred until each required integration can be verified across a routed boundary.
 - Assign each future public service guest only to its own service VLAN; its management access must be a narrow Lab-origin rule, not a second unrestricted Lab NIC.
 - If future services run directly on a NAS, require product-specific proof that each workload can use an isolated tagged interface/network while NAS administration stays private. A simple untagged NAS port is one VLAN for the whole host. Defer the final Files/Vault/Storage layout until NAS selection.
 - Give Uptime Kuma selected health-check paths and Homepage selected read-only API paths from Lab. Confirm both successful checks and denied unrelated access.
@@ -58,4 +60,4 @@ The reported connections, including the Archer LAN uplink on port 1, are not an 
 - Actual IoT integration protocols; separate trusted Wi-Fi/AP decision. Defer the Acer AI web-access decision until the service is hosted.
 - Pi game VLAN decision; NAS app/VM VLAN capabilities and backup flows; Cloudflare connector location and native-client compatibility.
 
-The [current topology](topology.md) and [current state](../../CURRENT_STATE.md) remain the deployed record. Update them only after each physical or network change has been verified.
+The [current topology](../network/topology.md) and [current state](../../CURRENT_STATE.md) remain the deployed record. Update them only after each physical or network change has been verified.

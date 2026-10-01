@@ -1,6 +1,8 @@
-# Self-hosted password manager
+# Deploy Bitwarden
 
-**Status:** production Bitwarden is planned with the future NAS implementation; Bitwarden variant and deployment architecture are not selected. A separate educational implementation is contemplated much later and will never hold real credentials.
+**Status:** Planned with the future NAS implementation. Bitwarden variant and deployment architecture are not selected. The separate [educational prototype](build-password-manager-prototype.md) is deferred and will never hold real credentials.
+
+**Dependencies:** [Establish NAS Storage](establish-nas-storage.md) and a tested restore; [Configure Remote Application Access](configure-remote-application-access.md) for any approved public application route.
 
 ## Goal
 
@@ -14,11 +16,7 @@ Provide an owner-controlled password vault with supported clients, strong authen
 - Require HTTPS, MFA, prompt updates, monitoring, encrypted exports, and an emergency recovery procedure. Keep application and NAS administration reachable only from approved Lab/Tailscale paths and deny lateral access to other service networks where enforceable.
 - Establish automated backups and complete a restore test before migrating the sole copy of any credential. Bitwarden explicitly assigns backup responsibility to the self-hosting operator.
 
-See the [segmentation decision](../decisions/0003-segmented-services-and-remote-access.md) and [storage plan](../architecture/storage-plan.md). The current HP memory/storage footprint and lack of dedicated backup storage require review before deployment.
-
-## Educational project boundary
-
-The owner may program a password-manager prototype after most infrastructure work to learn the concepts. It is separate from the production manager, uses synthetic test data only, and must not store real passwords, recovery material, or keys. Its hosting, publication, and security claims remain `TODO`.
+See the [segmentation decision](../decisions/0003-segmented-services-and-remote-access.md) and [storage plan](establish-nas-storage.md). The current HP memory/storage footprint and lack of dedicated backup storage require review before deployment.
 
 References: [Bitwarden self-hosting options](https://bitwarden.com/help/self-host-bitwarden/) and [self-hosted backup guidance](https://bitwarden.com/help/backup-on-premise/).
 

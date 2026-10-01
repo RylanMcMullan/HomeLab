@@ -1,48 +1,45 @@
-# Topology and components
+# Network Topology and Components
 
-**Status:** owner-provided current-state baseline. Internal subnets, IP addresses, DHCP scopes/reservations, VLAN memberships, Wi-Fi details, port forwarding, and firewall rules are `UNKNOWN` and intentionally omitted. Physical port roles below are owner-reported, not a verified cable trace.
+**Status:** current HomeLab boundary from reported placement and read-only observations dated 2026-09-14 and 2026-09-30. Exact addressing, identifiers, and live exports remain outside this public repository. Recheck mutable settings before changing the network.
 
 ## Network boundary
 
-1. Metronet is the ISP.
-2. A Zyxel modem/router is the primary household gateway.
-3. Household IoT devices have historically used the upstream Zyxel network. The owner reported all HomeLab IoT devices disconnected on 2026-09-25 pending controlled Home Assistant tests; per-device placement and independent verification remain `UNKNOWN`. Keep HomeLab IoT devices disconnected outside test windows until the security baseline is reviewed.
-4. The TP-Link Archer BE3500 HomeLab router connects from its WAN port to a LAN port on the Zyxel gateway.
-5. HomeLab wired and wireless devices operate behind the TP-Link router.
+Metronet service reaches the **Zyxel gateway**, which provides the household LAN. The **TP-Link Archer BE3500** connects from its WAN port to a Zyxel LAN port and provides the separate HomeLab LAN for wired and wireless clients. The reported 2026-09-30 smart-device placement is on the HomeLab LAN, except a Sengled bulb paired directly to Alexa and absent from the Archer IP-client inventory. This separates the smart devices from the household LAN but does not isolate them from other HomeLab hosts. Exact client mappings are in the private inventory; public findings are in [device-inventory history](../history/device-inventory.md).
 
-See [architecture overview](../architecture/overview.md) for the relationship diagram.
+## Zyxel gateway
 
-## Upstream household gateway
+| Field | Last known state |
+| --- | --- |
+| Role | Primary household gateway |
+| Exact model, firmware, ISP handoff | `UNKNOWN` |
+| Wi-Fi | Separate 2.4 GHz and 5 GHz names; Windows comparison on 2026-09-14 showed the same private IPv4 network, prefix, gateway, DNS, and DHCP behavior on both |
+| Router controls | Router mode, DHCP, and firewall enabled; no user-defined static routes shown; intra-BSS blocking disabled on both bands at 2026-09-14 UI inspection |
+| Cross-band multicast/broadcast | `UNKNOWN` |
 
-- Device: Zyxel modem/router; exact model, ISP handoff type, firmware, address, and configuration: `UNKNOWN`.
-- Role: primary household gateway.
-- Household IoT inventory and present connection details: `UNKNOWN`.
-- The upstream gateway presents separate 2.4 GHz and 5 GHz Wi-Fi network names, with smart devices generally using 2.4 GHz and computers/phones generally using 5 GHz.
-- Command-verified from the same Windows client on 2026-09-14: both upstream bands use the same private IPv4 network, prefix length, default gateway, IPv4 DNS configuration, and DHCP state. This supports treating them as one Layer 3 network for inventory and unicast testing. Wireless client isolation and multicast/broadcast forwarding between the bands remain `UNKNOWN`.
-- Management-UI verified on 2026-09-14: the upstream gateway operates in router mode with DHCP and its firewall enabled; both wireless radios operate as access points; intra-BSS traffic blocking is disabled on both bands; and no user-defined static routes were shown.
-- The upstream WAN used provider shared IPv4 address space and showed no connected IPv6 address at the observation time. Exact addressing, model, firmware, Wi-Fi names, and device identifiers are intentionally omitted from this public record.
-- Gateway lifecycle, ISP support, firmware provenance, cross-band multicast/broadcast behavior, and replacement requirements remain `TODO` security-review items.
+The WAN was observed in provider shared IPv4 space without a connected IPv6 address at inspection time; this is a dated observation, not a permanent service guarantee. Details of that baseline are in [network-discovery history](../history/network-discovery.md).
 
-## HomeLab router
+## TP-Link Archer BE3500
 
-- Device: TP-Link Archer BE3500.
-- Responsibilities: HomeLab routing, DHCP, static/reserved IP management, and separation of HomeLab from the upstream household network.
-- WAN relationship: WAN port connects to a Zyxel LAN port.
-- Management-UI verified on 2026-09-14: wireless-router mode; dynamic private WAN addressing from the upstream household network; separate private HomeLab `/24`; DHCP and SPI firewall enabled; no user-defined static routes, port forwards, or DMZ host; and device isolation disabled.
-- IGMP proxy, IGMP snooping, and wireless multicast forwarding are enabled. No mDNS or SSDP relay appeared in the router's settings search, so these IGMP-related controls are not represented as solving Home Assistant service discovery across the WAN boundary.
-- UPnP is enabled but reported zero clients at the observation time. Its necessity remains `TODO`; do not disable it until dependent applications are reviewed.
-- The routing table contained host routes associated with the router's WireGuard-server interface. Their purpose and current use are `UNKNOWN`; they were not modified.
-- Exact firmware, LAN/WAN addressing, DHCP ranges/reservations, Wi-Fi configuration, DNS, device identifiers, and device list are intentionally omitted. A firmware update was available at inspection time and remains unapplied pending a configuration backup and owner-approved maintenance window.
+| Field | Last known state |
+| --- | --- |
+| Role | HomeLab router, Wi-Fi, DHCP, and boundary from the household LAN |
+| Physical path | WAN port to Zyxel LAN port; LAN to managed switch reported |
+| Router controls | Wireless-router mode, dynamic private WAN address, separate HomeLab `/24`, DHCP and SPI firewall enabled, no user-defined static routes/port forwards/DMZ host, device isolation disabled at 2026-09-14 inspection |
+| Discovery controls | IGMP proxy/snooping and wireless multicast forwarding enabled; no mDNS or SSDP relay exposed in the inspected settings |
+| UPnP | Enabled with zero clients at inspection; present necessity `UNKNOWN` |
+| WireGuard-related routes | Host routes were present; purpose and use `UNKNOWN` |
+| Hardware revision and firmware | `UNKNOWN` publicly; verify privately before any update |
 
-## Managed switch
+No router VM, new inter-VLAN firewall, or general routed VLAN segmentation is deployed. The future design is in [Segment HomeLab Network](../plans/segment-homelab-network.md); it is not part of this current configuration.
 
-- Device: TP-Link TL-SG108PE, 8-port managed switch.
-- Owner-reported port map on 2026-09-24: port 1 = Archer LAN uplink, port 2 = HP EliteDesk, port 3 = Acer Nitro 5, port 4 = Raspberry Pi 5, and ports 5–8 = empty. This is not an independently verified cable trace.
-- VLAN/PVID configuration, firmware and hardware revision, management address, link speeds, and PoE usage: `UNKNOWN`.
-- The switch can carry planned segments but cannot independently provide their gateways or firewall policy. The proposed port and VLAN roles are in the [undeployed segmentation worksheet](segmentation-plan.md); the earlier upstream-IoT design in [decision 0002](../decisions/0002-home-assistant-upstream-network-access.md) was superseded.
+## TP-Link TL-SG108PE managed switch
 
-## Inventory TODO
+| Port | Reported connection on 2026-09-24 | Confidence |
+| --- | --- | --- |
+| 1 | Archer LAN uplink | Reported; cable trace unverified |
+| 2 | HP EliteDesk | Reported; cable trace unverified |
+| 3 | Acer Nitro 5 AN515-54 | Reported; cable trace unverified |
+| 4 | Raspberry Pi 5 | Reported; cable trace unverified |
+| 5–8 | Empty | Reported; current state unverified |
 
-Build a non-sensitive, owner-approved network inventory that identifies devices and roles without exposing credentials or private management details in this public repository. Prefer documentation that links to a private authoritative record when precise addressing is needed.
-
-Read-only collection and the decision path for Home Assistant are defined in the [network discovery runbook](discovery-runbook.md). Exact addressing is kept in an ignored local working map created from [the public placeholder template](../../configs/network-map.example.md).
+The switch is an 8-port managed model. Present VLAN/PVID membership, firmware/hardware revision, management placement, link speeds, and PoE use are `UNKNOWN`. A switch alone does not provide VLAN gateways or inter-VLAN firewall policy. Verify the cable trace and configuration before using its capabilities in the [network-segmentation plan](../plans/segment-homelab-network.md).

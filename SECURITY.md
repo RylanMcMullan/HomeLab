@@ -19,8 +19,9 @@ Use placeholders such as `<SECRET>`, `<API_TOKEN>`, `<PUBLIC_IP>`, `<USERNAME>`,
 
 - Do not publish private IP addresses, hostnames, Tailscale addresses, tailnet names, subnet routes, DHCP reservations, administrative endpoints, or public tunnel credentials unless the owner explicitly determines a value is safe and wants it public.
 - Document a service’s exposure architecturally; link to vendor documentation where detailed setup would require secret values.
-- Put repository-safe templates in `configs/` only when all secrets are placeholders. Put no live secret-bearing configuration here.
-- Keep secrets in a dedicated secret manager or another owner-controlled private location.
+- Put repository-safe, empty templates in [`docs/reference/templates/`](docs/reference/templates/README.md). Put no live secret-bearing configuration here.
+- Keep all raw/generated operational data outside the repository, including private IP/MAC inventories, router/client snapshots, command output, packet captures, screenshots, logs, backups, and live configuration exports. The approved local reference root on this workstation is `C:\Projects\Personal\PrivateResources\HomeLab`; `inventory/` holds the moved inventory. On another workstation, use an approved external `HOMELAB_PRIVATE_ROOT`. The external folder is not a secret manager or a substitute for access control, encryption, and backup.
+- Store credentials and recovery material in a dedicated secret manager when one becomes relevant; none is documented as deployed now. Do not place secrets in the general private reference folder.
 
 ## Security lab and password-manager requirements
 
@@ -37,4 +38,4 @@ Use placeholders such as `<SECRET>`, `<API_TOKEN>`, `<PUBLIC_IP>`, `<USERNAME>`,
 
 ## Review before publication
 
-Before committing, inspect `git diff` and check staged and untracked files for credentials, `.env` files, key material, copied configs, logs, and screenshots. `.gitignore` is convenience, not a security control.
+Before committing, inspect `git diff` and check staged and untracked files for credentials, private addresses/MACs, `.env` files, key material, copied configs, logs, and screenshots. `.gitignore` is convenience, not a security control. Moving a previously published file outside the checkout does not remove it from Git history; assess and rotate any exposed secret before considering history repair.

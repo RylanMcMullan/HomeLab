@@ -1,6 +1,6 @@
-# Jellyfin
+# Deploy Jellyfin
 
-**Status:** future project; not deployed. Deployment is deferred until suitable media storage is available.
+**Status:** Planned; not deployed. Depends on suitable media storage under [Establish NAS Storage](establish-nas-storage.md).
 
 ## Proposed architecture
 
@@ -8,13 +8,13 @@
 - Prefer Jellyfin's official Debian/Ubuntu packaging or official container image; do not run an unaudited third-party installer. See the [official Linux installation guide](https://jellyfin.org/docs/general/installation/linux/) and [official container documentation](https://jellyfin.org/docs/general/installation/container/).
 - Initial compute recommendation for light use: 2 vCPUs and 2 GiB RAM. Measure playback and transcoding before resizing.
 - Keep configuration/cache separate from media data so storage can be migrated later.
-- Keep initial access private to the HomeLab and Tailscale. The owner wants to evaluate later browser access through a public-facing domain; the route, authentication, client behavior, and exposure policy remain `TODO` until the service and storage are tested.
+- Keep initial access private to the HomeLab and Tailscale. A later browser route on a public-facing domain remains under evaluation; authentication, client behavior, and exposure policy remain `TODO` until the service and storage are tested.
 - The planned NAS is the likely durable media source after capacity and permissions are verified. Its application host, network segment, any cross-VLAN media path, and public route remain `TODO`.
 
 ## Storage and transcoding constraints
 
 - Media source, library size, growth rate, and backup expectations are `UNKNOWN`.
-- The Proxmox node currently has only its internal 256 GB-class NVMe device. This is sufficient for a small trial library, not assumed sufficient for a durable media collection.
+- The [HP EliteDesk](../hosts/hp-elitedesk.md) had internal-only storage at last verification. A small trial library may be possible; durable media capacity requires a separate storage decision.
 - The host's Intel UHD Graphics 630 may be useful for Quick Sync/VA-API transcoding, but LXC device access and codec support must be verified before claiming hardware acceleration. See [Jellyfin Intel GPU guidance](https://jellyfin.org/docs/general/post-install/transcoding/hardware-acceleration/intel/).
 - Initial deployment should favor direct play; transcoding demand, simultaneous streams, client formats, and remote-streaming requirements are `UNKNOWN`.
 

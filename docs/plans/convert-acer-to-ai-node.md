@@ -1,17 +1,22 @@
-# Local AI service
+# Convert Acer to AI Node
 
-**Status:** preparation deferred until after Home Assistant, network security, and Minecraft priorities; not deployed. Hardware inventory is complete and selected Windows files still need preservation/verification before installation. No Linux operating system, runtime, model, web interface, or automation framework has been selected or installed.
+**Status:** Deferred. Hardware inventory is complete, but selected Windows files still need preservation and verification before installation. No Linux operating system, runtime, model, web interface, or automation framework has been selected or installed.
+
+**Parent / related plans:** [Segment HomeLab Network](segment-homelab-network.md) establishes the private management path; [Establish NAS Storage](establish-nas-storage.md) may later provide AI data storage. The Acer remains a separate compute device.
 
 ## Intended service profile
 
 - Host: [Acer Nitro 5 AN515-54](../hosts/acer-nitro-5.md).
 - Availability: dedicated 24/7 node with a lightweight local graphical session.
 - Interfaces: local browser, private web interface, SSH administration, and an API for future integrations.
-- Network target: the Acer is owner-reported on wired switch port 3, proposed as an untagged Lab VLAN 20 access port. That placement separates the host from the Archer/IoT VLAN. For the initial network rollout, treat it only as a Lab node. Decide any AI chat access from other VLANs when the service is hosted; no such firewall exception is selected yet.
+- Local management browser: router, Proxmox, Home Assistant, and other management interfaces.
+- Closed-lid operation: turn off the built-in display without unintended suspend; verify airflow and sustained temperatures before continuous inference.
+- Network target: the Acer is reported on wired switch port 3, proposed as an untagged Lab VLAN 20 access port. That placement separates the host from the Archer/IoT VLAN. For the initial network rollout, treat it only as a Lab node. Decide any AI chat access from other VLANs when the service is hosted; no such firewall exception is selected yet.
 - Users: primarily the owner, with at most two or three users; up to approximately three owner-initiated processes.
 - Priorities: model quality first, then useful interactive response speed.
 - Initial workloads: light coding, automation, and cybersecurity research assistance.
 - Future workloads: smart-home assistance and Raspberry Pi-connected audio, camera, and physical I/O.
+- The two installed internal drives may be erased only after selected personal files have been preserved and opened from the backup copy.
 
 ## Capacity constraints
 
@@ -25,7 +30,7 @@
 
 These are candidates, not decisions:
 
-- A lightweight Ubuntu-family LTS desktop is the leading OS direction because the node must be both a server and a locally usable management station. Xubuntu 26.04 LTS offers an Xfce desktop and is supported through April 2029; final selection awaits hardware inventory and installer/driver review. See the [official Xubuntu release record](https://xubuntu.org/release/26.04/).
+- A lightweight Ubuntu-family LTS desktop is the leading OS direction because the node must be both a server and a locally usable management station. Xubuntu 26.04 LTS offers an Xfce desktop and was documented with support through April 2029; final selection awaits an updated compatibility and installer/driver review. See the [official Xubuntu release record](https://xubuntu.org/release/26.04/).
 - Ollama is a candidate inference manager with a local API. Its current hardware documentation supports NVIDIA GPUs with compute capability 5.0 or newer subject to driver requirements; the Acer's exact compatibility must be verified. See [Ollama hardware support](https://docs.ollama.com/gpu).
 - `llama.cpp` is a candidate when lower-level control over quantization, GPU-layer offload, context, and an OpenAI-compatible local server is valuable. See its [official CUDA build documentation](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md).
 - Open WebUI is a candidate multi-user browser interface compatible with Ollama and OpenAI-compatible APIs. See [Open WebUI documentation](https://docs.openwebui.com/).
@@ -53,3 +58,15 @@ Specific model families and quantizations remain `TODO` until current candidates
 - [ ] Measure sustained CPU/GPU temperatures and verify unobstructed airflow before approving closed-lid inference.
 - [ ] Restrict and verify local/Tailscale access before enabling integrations.
 - [ ] At AI deployment, decide and test any approved non-Tailscale chat access while denying unrelated Lab and inference endpoints.
+
+## Pre-install file-preservation procedure
+
+Before erasing either drive, review both the Windows system drive and the secondary drive. The 2026-09-14 storage snapshot and media-size mismatch are preserved in [Acer pre-install history](../history/acer-preinstall.md). Use the read-only [Windows backup audit](../../scripts/audit-windows-backup.ps1) to measure common locations and identify non-standard top-level folders. Raw reports can expose personal paths and belong in the private reference directory.
+
+- Review `%USERPROFILE%\Desktop`, `Documents`, `Downloads`, `Pictures`, `Videos`, `Music`, and `Saved Games`, plus OneDrive equivalents. Confirm Files On-Demand items are actually downloaded or synchronized before relying on a removable copy.
+- Review selected `%APPDATA%` and `%LOCALAPPDATA%` data: browser profiles, editor settings, game saves, and application databases. Do not blindly restore all Windows app data into Linux.
+- Review repositories, scripts, VM disks, databases, media libraries, and project folders outside the standard profile. Inventory and export WSL distributions and containers separately.
+- Preserve browser bookmarks and required profile data through supported sync or explicit export. Preserve existing SSH keys only if needed and only in encrypted private storage; replacement keys may be safer.
+- Keep any required BitLocker recovery key, Windows license/account information, and software-license records in a suitable secret manager or other protected location, never in this repository.
+
+Do not copy `C:\Windows`, `Program Files`, `Program Files (x86)`, or all of `ProgramData` as an application backup. Reinstall applications on the destination OS. Verify the backup by opening representative files from the removable drive before erasing either internal disk. Microsoft identifies Desktop, Documents, Pictures, Videos, and Music as standard Windows Backup folders; OneDrive folder status still needs explicit review. See [Microsoft Windows Backup](https://support.microsoft.com/en-us/windows/experience/backup-recovery/back-up-and-restore-with-windows-backup) and [OneDrive folder backup](https://support.microsoft.com/en-us/onedrive/back-up-your-folders-with-onedrive).

@@ -1,6 +1,6 @@
-# Portfolio website
+# Publish Portfolio Website
 
-**Status:** planned; not deployed.
+**Status:** Planned; not deployed. Depends on [Segment HomeLab Network](segment-homelab-network.md) and [Configure Remote Application Access](configure-remote-application-access.md).
 
 The intended project is a portfolio website hosted in a dedicated Proxmox guest on its own planned Portfolio VLAN. The website is intended to be public at the owner's domain apex through Cloudflare Tunnel and will not require a visitor login. Its guest and tunnel connector must have no general route to Lab management, IoT devices, Nextcloud, or the future password manager. Administration remains on an approved private Lab path.
 

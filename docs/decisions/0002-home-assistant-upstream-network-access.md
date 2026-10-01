@@ -5,7 +5,7 @@
 
 ## Context
 
-Home Assistant runs behind the dedicated HomeLab router, while the household IoT devices currently use the upstream household network. Read-only discovery confirmed that ordinary outbound unicast can cross this boundary, but no supported mDNS or SSDP reflection mechanism was found. Automatic discovery therefore remains incomplete.
+At the time of this 2026-09-14 decision, Home Assistant ran behind the dedicated HomeLab router while the intended household IoT devices used the upstream household network. The reported state changed on 2026-09-30 when those devices moved to the Archer; this paragraph is historical context, not current placement. Read-only discovery confirmed that ordinary outbound unicast could cross the former boundary, but no supported mDNS or SSDP reflection mechanism was found.
 
 The managed switch supports further investigation, but a switch cannot by itself create firewall policy or isolate wireless clients connected directly to either router. Any design must preserve private HomeLab management, Tailscale access, and the existing tunnel-based services.
 
@@ -43,7 +43,7 @@ This proposal was not deployed. The accepted target design moves compatible owne
 
 ## Related documentation
 
-- [Network discovery runbook](../network/discovery-runbook.md)
+- [Network-discovery history](../history/network-discovery.md) and [procedure](../reference/network-discovery.md)
 - [Network topology](../network/topology.md)
 - [Home Assistant](../services/home-assistant.md)
 - [Roadmap](../../ROADMAP.md)

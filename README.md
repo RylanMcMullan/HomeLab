@@ -24,34 +24,36 @@ This public repository is the canonical source of truth for the lab. It separate
 - A Raspberry Pi 5 hosting a public Minecraft Java server through playit.gg while administration remains private.
 - A layered household/HomeLab network boundary using Zyxel and TP-Link routing with a managed TP-Link switch.
 
-The next active build is converting an Acer Nitro 5 into a headed, 24/7 Linux AI node after its required files are preserved. See the [roadmap](ROADMAP.md) for dependency order and completion criteria.
+The active work is Home Assistant room-device onboarding, followed by staged network segmentation and Minecraft hardening. The Acer AI conversion is deferred. See the [roadmap](ROADMAP.md) for status and dependencies.
 
 ## Repository model
 
 | Record | Authority |
 | --- | --- |
-| [Current state](CURRENT_STATE.md) | Infrastructure deployed and believed operational |
-| [Roadmap](ROADMAP.md) | Planned, active, gated, or completed work |
+| [Current state](CURRENT_STATE.md) | Infrastructure deployed and operational |
+| [Roadmap](ROADMAP.md) | Broad progress checkboxes linked to stable plans |
 | [Changelog](CHANGELOG.md) | Significant infrastructure changes that already occurred |
 | [Architecture decisions](docs/decisions/README.md) | Durable technical choices and their trade-offs |
-| [Agent guide](AGENTS.md) | Required workflow for future contributors and Codex agents |
+| [History](docs/history/README.md) | Detailed dated observations and prior configurations |
+| [Agent guide](AGENTS.md) | Required workflow for future human and AI contributors |
 | [Security policy](SECURITY.md) | Public-repository threat model and secret-handling requirements |
 
 ## Documentation map
 
 - [Architecture](docs/architecture/README.md) — boundaries, service paths, and storage planning.
-- [Hardware](docs/hardware/README.md) — physical inventory and verified specifications.
-- [Hosts](docs/hosts/README.md) — operating systems, hypervisors, and host roles.
+- [Hosts](docs/hosts/README.md) — physical inventory, hardware capabilities, and installed platforms.
 - [Services](docs/services/README.md) — workloads, exposure, and administration paths.
 - [Network](docs/network/README.md) — gateways, routing boundary, switch, and topology.
-- [Configurations](configs/README.md) and [scripts](scripts/README.md) — repository-safe examples and reviewed discovery tools.
+- [Plans](docs/plans/README.md) — one stable file per planned objective.
+- [Reference](docs/reference/README.md) — terminology, documentation model, inventory guidance, and safe templates.
+- [Scripts](scripts/README.md) — reviewed discovery tools.
 
 ## Evidence and status language
 
-- **Deployed:** running and believed operational from owner-reported or command-verified evidence.
+- **Deployed:** running and believed operational from reported or directly verified evidence.
 - **Verified:** directly observed through a documented command or test.
-- **Reported:** explicitly supplied by the owner but not independently tested.
+- **Reported:** supplied by the operator but not independently tested.
 - **Planned:** intended work only; never evidence of deployment.
 - **UNKNOWN / TODO:** absent, unresolved, or awaiting verification.
 
-The repository intentionally excludes credentials, tokens, private addresses, hostnames, device identifiers, and live secret-bearing configuration. Refer to [SECURITY.md](SECURITY.md) before publishing operational details.
+The repository intentionally excludes credentials, tokens, private addresses, hostnames, device identifiers, raw output, and live secret-bearing configuration. The private reference directory is outside this checkout; a secret manager will be selected when needed. Refer to [SECURITY.md](SECURITY.md) before publishing operational details.

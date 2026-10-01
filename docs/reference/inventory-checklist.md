@@ -1,4 +1,4 @@
-# HomeLab inventory checklist
+# Infrastructure Inventory Checklist
 
 This checklist captures the information needed for sound container sizing, operating-system choices, local AI recommendations, capacity planning, and future projects. It is a discovery guide, not evidence that any item is deployed.
 
@@ -8,7 +8,7 @@ This checklist captures the information needed for sound container sizing, opera
 - Add only reviewed summaries to the relevant host, hardware, service, or network document.
 - Replace sensitive identifiers with role-based descriptions or placeholders.
 - Never collect or paste passwords, tokens, cookies, private keys, or credential files.
-- Record the collection date and whether a fact was command-verified or owner-reported.
+- Record the collection date and whether a fact was command-verified, reported, or inferred.
 
 ## Per physical host
 

@@ -2,7 +2,7 @@
 #
 # The report includes private addressing, gateways, DNS, routes, and cached
 # neighbor addresses. It omits SSIDs, public-IP lookups, MAC addresses, and
-# credential material. Keep its output under inventory-output/; do not commit.
+# credential material. Keep its output outside the repository; do not commit.
 
 [CmdletBinding()]
 param(
@@ -87,5 +87,5 @@ Get-NetNeighbor -AddressFamily IPv4 -ErrorAction SilentlyContinue |
     Write-Output
 
 Write-Section 'Privacy reminder'
-Write-Output 'Keep this report in inventory-output/. Do not commit it or paste it into public issues.'
+Write-Output 'Keep this report in the approved private reference directory outside the repository. Do not commit it or paste it into public issues.'
 Write-Output 'Before sharing, remove private addressing, hostnames, SSIDs, and any identifiers added outside this script.'

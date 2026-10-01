@@ -1,6 +1,6 @@
-# Cloudflare Tunnel
+# Configure Remote Application Access
 
-**Status:** planned; not deployed for any HomeLab service.
+**Status:** Planned; not deployed for any HomeLab service. Related to [Publish Portfolio Website](publish-portfolio-website.md), [Onboard Home Assistant](onboard-home-assistant.md), [Deploy Nextcloud](deploy-nextcloud.md), and [Deploy Bitwarden](deploy-bitwarden.md).
 
 The accepted target uses the owner's future domain and separately reviewed HTTPS routes for the public portfolio site at the domain apex and for Home Assistant, Nextcloud, and production Bitwarden on distinct subdomains. The owner also wants to evaluate a Jellyfin browser route after its deployment and authentication design are tested. These are planned names and routes only. A published application route exposes that application's login or content to the internet; Cloudflare Tunnel does not itself authenticate users.
 

@@ -1,24 +1,15 @@
-# Tailscale subnet router
+# Tailscale Subnet Router
 
-**Status:** deployed.
+**Status:** deployed subnet-router service in a lightweight [Proxmox VE](proxmox-ve.md) LXC hosted by the [HP EliteDesk](../hosts/hp-elitedesk.md), according to the reported state. Guest identity has not been command-verified inside the container.
 
 ## Purpose
 
-Tailscale runs as a subnet router inside a lightweight Proxmox LXC container. It provides secure remote access to the Proxmox management interface and internal HomeLab systems.
+Tailscale provides private remote access to the Proxmox management interface and internal HomeLab systems.
 
 ## Known configuration boundaries
 
-- Proxmox host: [HP EliteDesk](../hosts/proxmox-node.md).
-- The Proxmox inventory recorded one running, unprivileged Debian LXC with nesting enabled, 1 CPU core, 256 MiB RAM, 256 MiB swap, and a 2 GiB root filesystem. Based on the owner's report that Tailscale occupies a lightweight LXC, this guest is inferred to be the Tailscale subnet router; the service identity has not yet been command-verified inside the guest.
+- The 2026-09-14 Proxmox inventory recorded one running, unprivileged Debian LXC with nesting enabled, 1 CPU core, 256 MiB RAM, 256 MiB swap, and a 2 GiB root filesystem. Its association with Tailscale is inferred from the reported deployment and requires direct guest verification. The dated usage snapshot is in [history](../history/proxmox-baseline.md).
 - LXC ID and private addressing are intentionally not documented. Tailscale version, tailnet name, advertised subnet routes, exit-node status, ACLs, and DNS configuration remain `UNKNOWN`.
 - Authentication keys, login URLs, device keys, and configuration tokens are sensitive and must never be committed.
 
-## Verification TODO
-
-Verify active route(s), reachability scope, update posture, least-privilege access policy, and recovery/maintenance process through owner-approved administration channels. Document only safe, non-secret conclusions.
-
-Before adding private Homepage, Uptime Kuma, or a Minecraft web panel, verify which tailnet users/devices can reach each service and that unrelated IoT or public-service networks cannot reach its administrative endpoint. [MagicDNS](https://tailscale.com/docs/features/magicdns) supplies names for tailnet nodes; [Tailscale Serve](https://tailscale.com/docs/features/tailscale-serve) can expose a service only within the tailnet. The owner's domain would require a separate private DNS and certificate design. Do not point public DNS at private management endpoints merely for convenient names.
-
-## Proposed placement; not deployed
-
-The [segmented target](../decisions/0003-segmented-services-and-remote-access.md) keeps this LXC in the Lab management VLAN. Before moving it, inspect actual advertised routes and tailnet grants, then verify remote administration to permitted destinations and denial to unrelated service VLANs. If its internet gateway depends on the proposed router VM, Tailscale access through this LXC is expected to stop during router-VM failure; local switch port 3 and a Proxmox console form the recovery path. Direct Tailscale clients in other guests would be separate, explicitly scoped tailnet members, not an automatic bridge between VLANs.
+Current advertised routes, tailnet name, exit-node status, ACL/grants, DNS, version, update posture, and recovery behavior remain `UNKNOWN`. Verification and future placement are covered by [Segment HomeLab Network](../plans/segment-homelab-network.md) and [Deploy Management Services](../plans/deploy-management-services.md). The reported remote access must not be treated as a verified least-privilege policy.

@@ -1,6 +1,6 @@
-# Kali Linux security-research VM
+# Deploy Kali Research VM
 
-**Status:** planned persistent Proxmox VM; not deployed.
+**Status:** Planned; no persistent Kali VM is deployed. The network and research scope require review before deployment.
 
 ## Authorized purpose
 

@@ -12,15 +12,20 @@ This directory is reserved for safe, reviewable operational scripts.
 - [`collect-linux-inventory.sh`](collect-linux-inventory.sh) gathers read-only hardware, operating-system, capacity, and Proxmox resource information. Keep its raw output private and sanitize it before updating documentation.
 - [`collect-windows-inventory.ps1`](collect-windows-inventory.ps1) gathers read-only Windows hardware, firmware, storage, GPU, and platform information for pre-install planning. Run it on the machine being inventoried, not another workstation.
 - [`audit-windows-backup.ps1`](audit-windows-backup.ps1) measures common personal-data locations and non-system top-level folders before an OS migration. Its output contains private paths and folder names and must not be committed.
-- [`collect-windows-network.ps1`](collect-windows-network.ps1) captures private addressing, gateways, DNS, routes, and cached neighbors without scanning. Follow the [network discovery runbook](../docs/network/discovery-runbook.md) and keep its output private.
+- [`collect-windows-network.ps1`](collect-windows-network.ps1) captures private addressing, gateways, DNS, routes, and cached neighbors without scanning. Follow the [network discovery procedure](../docs/reference/network-discovery.md) and keep its output outside this repository.
+
+Set `HOMELAB_PRIVATE_ROOT` to the approved private reference directory before running any example. On this workstation it is `C:\Projects\Personal\PrivateResources\HomeLab`. In the current PowerShell session: `$env:HOMELAB_PRIVATE_ROOT = 'C:\Projects\Personal\PrivateResources\HomeLab'`. Do not redirect raw output beneath the GitHub checkout; an ignored file is still inside the public repository folder.
 
 ### Windows backup audit
 
 Run this only on the Windows computer being migrated. It reads file metadata to calculate counts and approximate sizes; it does not read file contents, copy data, or modify files. Large directories can take several minutes to enumerate.
 
 ```powershell
+if (-not $env:HOMELAB_PRIVATE_ROOT) { throw 'Set HOMELAB_PRIVATE_ROOT first.' }
+$privateInventory = Join-Path $env:HOMELAB_PRIVATE_ROOT 'inventory'
+if (-not (Test-Path -LiteralPath $privateInventory)) { throw 'The private inventory directory does not exist.' }
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\audit-windows-backup.ps1 |
-  Set-Content .\inventory-output\acer-backup-audit.txt
+  Set-Content (Join-Path $privateInventory 'acer-backup-audit.txt')
 ```
 
 When using a USB copy of the script, replace the paths with the removable drive letter. The raw report lists personal paths and must remain private. No rollback is necessary because the script is read-only; the wrapper command creates or replaces only the chosen report file.
@@ -32,9 +37,11 @@ Prerequisites: Windows PowerShell 5.1 or PowerShell 7. Run PowerShell as Adminis
 From a repository checkout located on the Windows host being inventoried:
 
 ```powershell
-New-Item -ItemType Directory -Force .\inventory-output | Out-Null
+if (-not $env:HOMELAB_PRIVATE_ROOT) { throw 'Set HOMELAB_PRIVATE_ROOT first.' }
+$privateInventory = Join-Path $env:HOMELAB_PRIVATE_ROOT 'inventory'
+if (-not (Test-Path -LiteralPath $privateInventory)) { throw 'The private inventory directory does not exist.' }
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\collect-windows-inventory.ps1 |
-  Set-Content .\inventory-output\acer-preinstall.inventory.txt
+  Set-Content (Join-Path $privateInventory 'acer-preinstall.inventory.txt')
 ```
 
 `-ExecutionPolicy Bypass` applies only to that PowerShell process; it does not change the machine's configured execution policy. Expected effects: the script performs read-only system queries and prints a report. The command creates or replaces only the specified ignored output file. No system rollback is necessary.
@@ -56,10 +63,10 @@ Or stream it from a local PowerShell repository checkout to a host without copyi
 ```powershell
 Get-Content -Raw .\scripts\collect-linux-inventory.sh |
   ssh <USERNAME>@<HOST> "sed 's/\r$//' | bash -s" |
-  Set-Content .\inventory-output\host.inventory.txt
+  Set-Content (Join-Path $privateInventory 'host.inventory.txt')
 ```
 
-Create `inventory-output/` locally before using the PowerShell example. The directory and `*.inventory.txt` files are ignored by Git. Enter any SSH password only in the terminal's password prompt, never in the command or a repository file.
+Set `$privateInventory` as shown above before using the PowerShell SSH example. Enter any SSH password only in the terminal's password prompt, never in the command or a repository file.
 
 The remote `sed` step removes carriage returns that Windows PowerShell may append while streaming text. Without it, Bash can finish the collector but report a harmless final error such as `$'\r': command not found`.
 
