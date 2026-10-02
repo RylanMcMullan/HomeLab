@@ -42,7 +42,7 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 
 ### [Establish NAS Storage](docs/plans/establish-nas-storage.md)
 
-- [ ] Select a NAS against capacity, application isolation, network, power, and recovery requirements.
+- [x] Select and purchase the NAS enclosure and initial SSD/HDD (reported 2026-10-02); verify the hardware after delivery. [Purchased hardware](docs/plans/establish-nas-storage.md#purchased-hardware--reported-2026-10-02)
 - [ ] Deploy protected storage and separate application/management access as supported by the chosen platform.
 - [ ] Establish an independent backup copy and verify a representative restore.
 
@@ -70,7 +70,7 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 
 ### [Configure Remote Application Access](docs/plans/configure-remote-application-access.md)
 
-- [ ] Establish the domain and Cloudflare Tunnel only for approved application origins.
+- [ ] Establish the domain and approved public HTTPS ingress only for reviewed application origins.
 - [ ] Verify application authentication, native clients, and denial of public management access.
 
 ## Planned — authorized research

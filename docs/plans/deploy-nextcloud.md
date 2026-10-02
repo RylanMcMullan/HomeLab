@@ -8,7 +8,7 @@
 - If using Proxmox, prefer a VM over Docker nested inside LXC; Nextcloud AIO recommends KVM or a non-virtualized host for best compatibility.
 - Initial compute estimate for a small VM deployment: 2 vCPUs and 4 GiB RAM, subject to optional AIO components and measured use. NAS-hosted capacity is `UNKNOWN`.
 - Keep application/database data separate from bulk files in the backup and restore plan, regardless of host.
-- Keep initial evaluation private until storage and recovery are tested. A separate Files VLAN is a candidate if the final host can enforce it. A Cloudflare Tunnel route on the owner's future `drive` subdomain is planned for browser and desktop/mobile clients after authentication and recovery tests. No VLAN, domain route, TLS configuration, or public access is deployed.
+- Keep initial evaluation private until storage and recovery are tested. A separate Files VLAN is a candidate if the final host can enforce it. The [remote-access plan](configure-remote-application-access.md) favors an ordinary public HTTPS route on the owner's future `drive` subdomain through a VPS reverse proxy and private origin link after authentication and recovery tests. No VLAN, domain route, TLS configuration, or public access is deployed.
 - Keep application and NAS administration private through narrow Lab/Tailscale paths. Deny Files-to-Lab, Files-to-IoT, and Files-to-other-service access except documented dependencies if the chosen platform can enforce a separate Files network. See [decision 0003](../decisions/0003-segmented-services-and-remote-access.md) and the [VLAN worksheet](segment-homelab-network.md).
 
 See the [official Nextcloud AIO repository](https://github.com/nextcloud/all-in-one).
@@ -21,12 +21,13 @@ See the [official Nextcloud AIO repository](https://github.com/nextcloud/all-in-
 - The planned NAS may hold primary data and local backups under separate permissions, but an independent recovery copy of critical data is still required.
 - Optional AIO components such as office, antivirus, full-text search, Talk, and recording increase resource requirements and should remain disabled unless needed.
 - On a NAS, verify AIO's Docker-socket access, container orchestration, SSD-backed application/database volumes, HDD data path, backup scope, and upgrade behavior before accepting direct hosting. [AIO's own Cloudflare notes](https://github.com/nextcloud/all-in-one#notes-on-cloudflare-proxytunnel) identify upload size, timeout, domain-validation, and local access constraints; test representative large-file sync through the proposed public route.
+- The [remote-access plan](configure-remote-application-access.md) now favors an ordinary public HTTPS `drive` route through a VPS reverse proxy and private origin link, with Cloudflare DNS-only for this record. Test large WebDAV uploads/downloads, timeouts, desktop/mobile sync, trusted proxy settings, and TOTP/FIDO2 enrollment with revocable client app passwords. AIO inside a small NAS-hosted Debian VM is a stronger isolation candidate than giving its master container the UGOS host Docker socket; verify NAS VM-to-HDD-share behavior and budget a 16 GB NAS RAM upgrade first. [Nextcloud documents client authentication with 2FA](https://docs.nextcloud.com/server/latest/user_manual/en/user_2fa.html).
 
 ## Verification checklist
 
 - [ ] The selected VM or NAS app runtime supports the official deployment method and workload isolation.
 - [ ] AIO configuration and data locations are documented without credentials.
-- [ ] HTTPS tunnel route, application MFA, and any additional edge authentication are selected and verified with intended clients.
+- [ ] Public HTTPS route, application MFA, and any additional edge authentication are selected and verified with intended clients.
 - [ ] Desktop/mobile sync is tested with non-critical data.
 - [ ] Inter-VLAN firewall rules allow only required administrative, health-check, and data/backup flows.
 - [ ] Backup and restore are tested before storing important files.
