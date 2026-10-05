@@ -14,7 +14,8 @@ Plan filenames are stable. Each plan states its status and records related plans
 | [Deploy Jellyfin](deploy-jellyfin.md) | Planned | Depends on NAS/storage decision |
 | [Deploy Nextcloud](deploy-nextcloud.md) | Planned | Depends on NAS/storage and remote access |
 | [Deploy Bitwarden](deploy-bitwarden.md) | Planned | Depends on NAS/storage and tested recovery |
-| [Publish Portfolio Website](publish-portfolio-website.md) | Planned | Depends on isolated hosting and remote access |
+| [Publish Portfolio Website](publish-portfolio-website.md) | Planned | Tunnel first if isolation gate passes; Pages fallback for first public release |
+| [Configure Portfolio Email](configure-portfolio-email.md) | Planned | Two-way custom-domain mail for the portfolio |
 | [Configure Remote Application Access](configure-remote-application-access.md) | Planned | Related to published applications |
 | [Evaluate Optional Home Assistant Devices](evaluate-optional-home-assistant-devices.md) | Deferred | Follows room devices and network baseline |
 | [Build Password Manager Prototype](build-password-manager-prototype.md) | Deferred | Separate from production Bitwarden |

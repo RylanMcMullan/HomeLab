@@ -13,6 +13,8 @@
 
 **2026-10-01 authentication clarification:** The operator requires strong MFA for Nextcloud and Bitwarden but accepts Jellyfin account authentication without MFA when the media service is isolated and its HTTPS route and account controls are tested. The earlier strict-MFA concern for Roku is no longer a publication gate. Public route and isolation remain planned, not deployed.
 
+**2026-10-05 portfolio launch update:** [Decision 0004](0004-portfolio-launch-hosting.md) permits a conditional tunnel-first portfolio release before the Portfolio VLAN only if a separate guest, connector restriction, verified isolation, and recovery gate pass. Cloudflare Pages is the fallback for the first public page. The Portfolio VLAN remains the target architecture; no exception is evidence that it is deployed.
+
 ## Context
 
 The intended design lets Home Assistant discover Wi-Fi IoT devices, separates Lab administration from public applications, uses the managed switch and Proxmox for VLAN experience, and permits selected applications from a phone or laptop without requiring Tailscale. The TP-Link Archer BE3500 provides a single HomeLab LAN and Wi-Fi network; general-purpose routed LAN VLANs have not been verified on it. The TL-SG108PE can carry 802.1Q VLANs, but does not provide their gateways or firewall policy.

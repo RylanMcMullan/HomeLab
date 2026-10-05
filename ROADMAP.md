@@ -61,16 +61,21 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 - [ ] Deploy the selected official Bitwarden variant with HTTPS, MFA, isolation, and durable storage.
 - [ ] Verify clients, independent backup, and restore before making it the sole copy of credentials.
 
-## Planned — publishing
+## Planned — publishing (2026-10-06 first-page target)
 
 ### [Publish Portfolio Website](docs/plans/publish-portfolio-website.md)
 
-- [ ] Deploy the site in an isolated guest with private administration and backup.
-- [ ] Publish the reviewed application route and verify its intended public access.
+- [ ] Build and review a small portfolio in a separate public repository.
+- [ ] Verify the dedicated guest, isolation, connector, and recovery gate; use Pages for the first public release if the gate cannot pass in time.
+- [ ] Publish the reviewed site at the domain apex and verify external HTTPS, content, links, and recovery.
+
+### [Configure Portfolio Email](docs/plans/configure-portfolio-email.md)
+
+- [ ] Select a custom-domain mailbox provider and verify `mail@<DOMAIN>` inbound delivery, Gmail access or forwarding, and replies from the custom address.
 
 ### [Configure Remote Application Access](docs/plans/configure-remote-application-access.md)
 
-- [ ] Establish the domain and approved public HTTPS ingress only for reviewed application origins.
+- [ ] Register and verify the domain; establish approved public HTTPS ingress only for reviewed application origins.
 - [ ] Verify application authentication, native clients, and denial of public management access.
 
 ## Planned — authorized research
