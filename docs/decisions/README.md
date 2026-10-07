@@ -8,6 +8,7 @@ Use this directory for major, durable decisions that affect topology, hosting, e
 - [0002 — Home Assistant access to upstream IoT devices](0002-home-assistant-upstream-network-access.md) — superseded. The smart-device move to the Archer was reported on 2026-09-30; no router-VM or VLAN architecture change has been verified.
 - [0003 — Segmented services and remote access](0003-segmented-services-and-remote-access.md) — accepted target design; implementation has not begun.
 - [0004 — Portfolio launch hosting](0004-portfolio-launch-hosting.md) — conditional tunnel-first launch with a Pages fallback; implementation has not begun.
+- [0005 — Independent management recovery](0005-independent-management-recovery.md) — accepted target for monitoring and recovery outside the HP host; implementation is planned.
 
 ## Record format
 

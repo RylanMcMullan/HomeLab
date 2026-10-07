@@ -14,6 +14,12 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 
 ## Planned — next sequence
 
+### [Establish Remote Recovery](docs/plans/establish-remote-recovery.md)
+
+- [ ] Verify an independent observer and private management path that remain reachable when the HP is off.
+- [ ] Test a supported HP power-on path and document a last-resort power-cycle option, if needed.
+- [ ] Verify alerts, route failure behavior, and recovery without relying on the HP-hosted router or Tailscale LXC alone.
+
 ### [Segment HomeLab Network](docs/plans/segment-homelab-network.md)
 
 - [ ] Deploy a staged router-VM and one test segment after the initial room-device tests.
@@ -29,7 +35,7 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 
 ### [Deploy Management Services](docs/plans/deploy-management-services.md)
 
-- [ ] Deploy private Uptime Kuma monitoring for selected services.
+- [ ] Deploy private Uptime Kuma monitoring on a verified host independent of the HP.
 - [ ] Deploy a private Homepage dashboard with links and narrowly scoped optional widgets.
 - [ ] Verify tailnet-only administration and approved cross-network health/status paths.
 
@@ -66,12 +72,12 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 ### [Publish Portfolio Website](docs/plans/publish-portfolio-website.md)
 
 - [ ] Build and review a small portfolio in a separate public repository.
-- [ ] Verify the dedicated guest, isolation, connector, and recovery gate; use Pages for the first public release if the gate cannot pass in time.
-- [ ] Publish the reviewed site at the domain apex and verify external HTTPS, content, links, and recovery.
+- [ ] Verify the dedicated guest, isolation, connector, and external route; use Pages for the first public release if the security gate cannot pass in time.
+- [ ] Publish the reviewed site at the domain apex and verify external HTTPS, content, and links.
 
 ### [Configure Portfolio Email](docs/plans/configure-portfolio-email.md)
 
-- [ ] Select a custom-domain mailbox provider and verify `mail@<DOMAIN>` inbound delivery, Gmail access or forwarding, and replies from the custom address.
+- [ ] Select a custom-domain mailbox provider and verify `mail@<DOMAIN>` inbound delivery and replies through a separate professional inbox accessible in Outlook.
 
 ### [Configure Remote Application Access](docs/plans/configure-remote-application-access.md)
 

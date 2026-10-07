@@ -10,7 +10,7 @@ Each fact has one authoritative home. Link to it instead of copying it into seve
 | `docs/network/` | Current topology and network-component state | Present; no proposed VLANs |
 | [`ROADMAP.md`](../../ROADMAP.md) | Progress checklist of broad actions, each linked to a plan | Future and in progress |
 | `docs/plans/` | One stable file per objective: status, parent/related plans, dependencies, procedure, verification, and rollback where applicable; unresolved gates stay `TODO` | Future until evidence confirms completion |
-| `docs/history/` | Chronological evidence and prior configurations by topic; a broad plan may link to several topics | Past, with dated entries and provenance |
+| `docs/history/` | Chronological evidence and prior configurations by topic; concise `incidents/` pages link the evidence for individual problems | Past, with dated entries and provenance |
 | `docs/decisions/` | Durable architecture choices and trade-offs | The decision at its date; status may change |
 | [`CHANGELOG.md`](../../CHANGELOG.md) | Brief significant infrastructure changes, linking to detailed history | Past |
 | `docs/reference/` | Terminology, reusable procedures, and safe templates | Time-independent guidance |

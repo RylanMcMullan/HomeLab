@@ -2,6 +2,8 @@
 
 Each topic file is a chronological record with dated observations, prior configurations, source/confidence, and links to relevant plans. A single plan may produce entries in several history topics. These public records preserve detailed sanitized evidence; raw operational output remains in the private reference directory.
 
+Individual problems have a concise [incident history index](incidents/README.md) and use the [incident template](../reference/templates/incident-history.example.md). Incident pages point to the topic histories for full dated evidence and to current records for deployed state, so the same facts do not need to be maintained in multiple places.
+
 | Topic | Record |
 | --- | --- |
 | Home Assistant deployment and configuration | [Home Assistant](home-assistant.md) |

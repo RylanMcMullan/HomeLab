@@ -15,6 +15,8 @@
 
 **2026-10-05 portfolio launch update:** [Decision 0004](0004-portfolio-launch-hosting.md) permits a conditional tunnel-first portfolio release before the Portfolio VLAN only if a separate guest, connector restriction, verified isolation, and recovery gate pass. Cloudflare Pages is the fallback for the first public page. The Portfolio VLAN remains the target architecture; no exception is evidence that it is deployed.
 
+**2026-10-06 recovery update:** [Decision 0005](0005-independent-management-recovery.md) supersedes the Uptime Kuma placement described below: the primary outage observer and a remote management path will be placed on a device independent of the HP after sizing and security checks. Homepage may remain in Lab on the HP. Health-check rules must follow the independent observer's actual segment. The router VM must not become the only path to recover Proxmox.
+
 ## Context
 
 The intended design lets Home Assistant discover Wi-Fi IoT devices, separates Lab administration from public applications, uses the managed switch and Proxmox for VLAN experience, and permits selected applications from a phone or laptop without requiring Tailscale. The TP-Link Archer BE3500 provides a single HomeLab LAN and Wi-Fi network; general-purpose routed LAN VLANs have not been verified on it. The TL-SG108PE can carry 802.1Q VLANs, but does not provide their gateways or firewall policy.

@@ -11,5 +11,6 @@ The accepted but undeployed [network-segmentation plan](../plans/segment-homelab
 | Managed switch | [Topology](topology.md#tp-link-tl-sg108pe-managed-switch) |
 | Remote access | [Tailscale service](../services/tailscale.md) |
 | Private addressing capture and cross-network discovery | [Network discovery procedure](../reference/network-discovery.md) and [dated history](../history/network-discovery.md) |
+| Slow or unstable wired link | [Ethernet link troubleshooting](../reference/troubleshoot-ethernet-link.md) and the [HP coupler case](../history/network-discovery.md#2026-10-06--patch-coupler-seating-diagnosis) |
 
 Exact addressing belongs only in the ignored private-map copy described by the runbook. This public directory records topology, trust boundaries, and verified behavior without publishing a reconnaissance-ready device map.

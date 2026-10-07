@@ -10,7 +10,7 @@ Canonical display names and aliases only. Specifications, status, and exact iden
 | Device | Zyxel gateway | Exact model `UNKNOWN` | [Topology](../network/topology.md) |
 | Device | TP-Link Archer BE3500 | HomeLab router; “Archer” is a short alias | [Topology](../network/topology.md) |
 | Device | TP-Link TL-SG108PE | Managed switch | [Topology](../network/topology.md) |
-| Device | HP EliteDesk | Exact submodel `UNKNOWN`; physical host, not synonymous with Proxmox VE | [Host](../hosts/hp-elitedesk.md) |
+| Device | HP EliteDesk 800 G5 Mini | Physical host, not synonymous with Proxmox VE; model verified in the [host record](../hosts/hp-elitedesk.md) | [Host](../hosts/hp-elitedesk.md) |
 | Device | Raspberry Pi 5 | Physical Minecraft host | [Host](../hosts/raspberry-pi-5.md) |
 | Device | Acer Nitro 5 AN515-54 | Physical Acer host; distinct from the repository workstation | [Host](../hosts/acer-nitro-5.md) |
 | Device | Govee H5083 smart plug | Router alias “Miscellaneous Smart Plug” | [Home Assistant plan](../plans/onboard-home-assistant.md) |

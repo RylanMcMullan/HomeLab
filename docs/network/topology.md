@@ -1,6 +1,6 @@
 # Network Topology and Components
 
-**Status:** current HomeLab boundary from reported placement and read-only observations dated 2026-09-14 and 2026-09-30. Exact addressing, identifiers, and live exports remain outside this public repository. Recheck mutable settings before changing the network.
+**Status:** current HomeLab boundary from reported placement and read-only observations dated 2026-09-14 and 2026-09-30, with a 2026-10-06 HP cable and switch-port update. Exact addressing, identifiers, and live exports remain outside this public repository. Recheck mutable settings before changing the network.
 
 ## Network boundary
 
@@ -34,12 +34,12 @@ No router VM, new inter-VLAN firewall, or general routed VLAN segmentation is de
 
 ## TP-Link TL-SG108PE managed switch
 
-| Port | Reported connection on 2026-09-24 | Confidence |
+| Port | Last known connection | Confidence |
 | --- | --- | --- |
-| 1 | Archer LAN uplink | Reported; cable trace unverified |
-| 2 | HP EliteDesk | Reported; cable trace unverified |
-| 3 | Acer Nitro 5 AN515-54 | Reported; cable trace unverified |
-| 4 | Raspberry Pi 5 | Reported; cable trace unverified |
-| 5–8 | Empty | Reported; current state unverified |
+| 1 | Archer LAN uplink | Earlier report; 2026-10-06 operator report places all four devices on ports 1–4, but cable trace unverified |
+| 2 | HP EliteDesk 800 G5 Mini | Operator-reported final placement on 2026-10-06; HP command check verified 1,000 Mb/s before and after a controlled reboot |
+| 3 | Acer Nitro 5 AN515-54 | Inferred from the prior port map and final four-device report; current cable trace unverified |
+| 4 | Raspberry Pi 5 | Earlier report; current cable trace unverified |
+| 5–8 | `UNKNOWN` | Previously reported empty; current state unverified |
 
-The switch is an 8-port managed model. Present VLAN/PVID membership, firmware/hardware revision, management placement, link speeds, and PoE use are `UNKNOWN`. A switch alone does not provide VLAN gateways or inter-VLAN firewall policy. Verify the cable trace and configuration before using its capabilities in the [network-segmentation plan](../plans/segment-homelab-network.md).
+The operator-reported HP cable path includes a blue six-inch Mnlnbuao slim Cat6A patch cable, a patch-panel coupler, and a black five-foot Jadaol Cat6 cable. Reseating the black cable at the coupler restored gigabit negotiation during the 2026-10-06 tests. The switch is an 8-port managed model. Present VLAN/PVID membership, firmware/hardware revision, management placement, other link speeds, and PoE use are `UNKNOWN`. A switch alone does not provide VLAN gateways or inter-VLAN firewall policy. Verify the cable trace and configuration before using its capabilities in the [network-segmentation plan](../plans/segment-homelab-network.md). The [dated port-change and coupler tests](../history/network-discovery.md#2026-10-06--patch-coupler-seating-diagnosis) preserve the diagnostic sequence.

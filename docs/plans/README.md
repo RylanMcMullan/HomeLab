@@ -6,6 +6,7 @@ Plan filenames are stable. Each plan states its status and records related plans
 | --- | --- | --- |
 | [Verify Infrastructure Baseline](verify-infrastructure-baseline.md) | Planned | Supplies current facts to all implementation plans |
 | [Onboard Home Assistant](onboard-home-assistant.md) | Active | Precedes network segmentation |
+| [Establish Remote Recovery](establish-remote-recovery.md) | Planned | Independent monitoring and control before management migration |
 | [Segment HomeLab Network](segment-homelab-network.md) | Planned | Follows room-device onboarding |
 | [Harden Minecraft Server](harden-minecraft-server.md) | Planned | Follows initial network baseline |
 | [Deploy Management Services](deploy-management-services.md) | Planned | Depends on Lab access and Minecraft inventory |
