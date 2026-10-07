@@ -1,5 +1,8 @@
 # Reference
 
+- [GitHub Student Developer Pack for HomeLab](github-student-developer-pack.md) — dated offers, cost baseline, and reuse rules for future deployments.
+- [Human and agent operating boundary](human-agent-operating-boundary.md) — default responsibility split for sensitive configuration, implementation, and observation.
+
 - [Documentation model](documentation-model.md): where facts, plans, decisions, and evidence belong.
 - [Terminology](terminology.md): canonical device, network, platform, and service names.
 - [Infrastructure inventory checklist](inventory-checklist.md): reusable capability and specification fields.

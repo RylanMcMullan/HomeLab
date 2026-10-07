@@ -10,6 +10,7 @@ Individual problems have a concise [incident history index](incidents/README.md)
 | Network discovery and prior boundary tests | [Network discovery](network-discovery.md) |
 | IoT connectivity and device identity | [Device inventory](device-inventory.md) |
 | HP/Proxmox baseline observations | [Proxmox baseline](proxmox-baseline.md) |
+| Portfolio VM installation and rollback | [Portfolio VM installation attempt](portfolio-vm-installation-attempt.md) |
 | Acer pre-install observations | [Acer pre-install](acer-preinstall.md) |
 
 Do not replace a dated fact with a later state. Add a new dated entry and update the current record. Propose a correction to historical factual content before changing it.

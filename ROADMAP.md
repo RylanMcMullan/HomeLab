@@ -67,12 +67,12 @@ This is a progress checklist, not an instruction manual. Each plan title links t
 - [ ] Deploy the selected official Bitwarden variant with HTTPS, MFA, isolation, and durable storage.
 - [ ] Verify clients, independent backup, and restore before making it the sole copy of credentials.
 
-## Planned — publishing (2026-10-06 first-page target)
+## Planned — publishing
 
 ### [Publish Portfolio Website](docs/plans/publish-portfolio-website.md)
 
 - [ ] Build and review a small portfolio in a separate public repository.
-- [ ] Verify the dedicated guest, isolation, connector, and external route; use Pages for the first public release if the security gate cannot pass in time.
+- [ ] After the broader HomeLab segmentation work is ready, create a clean dedicated guest and verify its segment, connector, and external route.
 - [ ] Publish the reviewed site at the domain apex and verify external HTTPS, content, and links.
 
 ### [Configure Portfolio Email](docs/plans/configure-portfolio-email.md)

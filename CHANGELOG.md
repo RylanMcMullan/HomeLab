@@ -4,6 +4,13 @@ This changelog records significant infrastructure changes only. Documentation-on
 
 ## Unreleased
 
+### 2026-10-07 — Portfolio VM attempt removed
+
+- What changed: removed the unsuccessful portfolio installation guest, its virtual disk and installer ISO, and all temporary bridge, forwarding, NAT, nftables, rollback-unit, and staging-file changes from the HP Proxmox host.
+- Scope / affected systems: HP EliteDesk Proxmox host only. The host returned to its prior two-guest workload and management-network configuration; no website, tunnel, or public route was deployed.
+- Verification: Proxmox showed only the running Tailscale LXC and Home Assistant VM; the temporary bridge was absent, IPv4 forwarding was disabled, no nftables tables from the attempt remained, and the HP link was up at 1,000 Mb/s full duplex.
+- Documentation: [Portfolio VM attempt](docs/history/portfolio-vm-installation-attempt.md), [current state](CURRENT_STATE.md), and [portfolio plan](docs/plans/publish-portfolio-website.md).
+
 ### 2026-10-06 — HP link and guest startup recovered; portfolio VM prepared
 
 - What changed: created a dedicated, powered-off portfolio VM with no virtual NIC; downloaded and checksum-verified the Debian installer; enabled a reversible NIC offload mitigation on the HP host. The operator's coupler reseat restored gigabit negotiation on the final port 2 connection. The Tailscale LXC, found stopped with automatic start disabled after the earlier reboot, was started and configured to boot before Home Assistant.

@@ -1,6 +1,6 @@
 # Proxmox VE
 
-**Status:** deployed virtualization platform on the [HP EliteDesk 800 G5 Mini](../hosts/hp-elitedesk.md). Platform and current guest/resource values below were command-verified on 2026-10-06; deeper storage-health and peak-load sizing remain open.
+**Status:** deployed virtualization platform on the [HP EliteDesk 800 G5 Mini](../hosts/hp-elitedesk.md). Platform and resource values below were command-verified on 2026-10-06; the guest inventory and physical link were checked again on 2026-10-07. Deeper storage-health and peak-load sizing remain open.
 
 | Current-configuration field | Last verified value |
 | --- | --- |
@@ -9,7 +9,7 @@
 | Running kernel | `7.0.2-6-pve` |
 | Physical host | [HP EliteDesk 800 G5 Mini](../hosts/hp-elitedesk.md) |
 | Storage | Internal Samsung NVMe only at last verification; 1 GiB EFI, 69.2 GiB ext4 root, 8 GiB swap LV, 140.9 GiB LVM-thin pool |
-| Hosted workloads | [Home Assistant OS VM](home-assistant.md), verified [Tailscale subnet-router LXC](tailscale.md), and a stopped, uninstalled portfolio VM with no virtual NIC |
+| Hosted workloads | [Home Assistant OS VM](home-assistant.md) and verified [Tailscale subnet-router LXC](tailscale.md) |
 
 The known LXC is unprivileged and Debian-based, with 1 CPU core, 256 MiB RAM, 256 MiB swap, and a 2 GiB root filesystem. Its Tailscale identity was verified inside the guest on 2026-10-06. Nesting was observed on 2026-09-14 but was not rechecked. The initial one-LXC/zero-VM observation is kept in [history](../history/proxmox-baseline.md), not treated as the current guest count.
 
@@ -19,4 +19,4 @@ Tailscale provides the reported remote administration path. Exact host/guest ide
 
 **2026-10-06 reachability and NIC status:** Web UI and shell reachability returned after the reported outage and restart. The prior boot logged repeated Intel `e1000e` NIC hardware hangs. After the operator reseated the patch-panel coupler connection and returned the HP to switch port 2, the Intel I219-LM link verified 1,000 Mb/s full duplex, selected error and timeout counters were zero, and a five-packet external ping had no loss. A reversible `nic0-offloads.service` disables TSO, GSO, and GRO at boot; a later controlled reboot verified its persistence, the 1 Gb/s link, and no matching NIC hang at the check. The [dated evidence and rollback](../history/proxmox-baseline.md#2026-10-06--reported-management-reachability-interruption) do not establish sustained stability or the root cause of the earlier hangs. Monitor before public hosting.
 
-**2026-10-06 portfolio VM status:** A dedicated, powered-off VM has an official checksum-verified Debian installer attached, a 16 GiB disk, one vCPU, and 2 GiB RAM. It has no virtual NIC and no installed OS. See the [preparation evidence](../history/proxmox-baseline.md#2026-10-06--reported-management-reachability-interruption) and [publication plan](../plans/publish-portfolio-website.md).
+**2026-10-07 portfolio VM outcome:** The unsuccessful installation guest, its virtual disk, and its installer ISO were deleted. The temporary guest bridge, forwarding, NAT, nftables rules, rollback units, and staging files were removed; verification found the temporary bridge absent, IPv4 forwarding disabled, and no remaining nftables tables from the attempt. See the [installation-attempt history](../history/portfolio-vm-installation-attempt.md) and [publication plan](../plans/publish-portfolio-website.md).

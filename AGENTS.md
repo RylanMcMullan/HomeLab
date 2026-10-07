@@ -35,6 +35,14 @@ This repository is the canonical, public documentation source of truth for the H
 - Keep documents useful to humans and future AI agents. State scope, status, and unknowns plainly.
 - Record significant completed infrastructure changes in `CHANGELOG.md`; do not log ordinary wording or formatting edits.
 
+## Human and agent operating boundary
+
+- Treat security-sensitive infrastructure configuration as a human-operated task by default. This includes hypervisor and VM installation, host networking, bridges, routing, firewall and VLAN changes, storage layout, authentication, DNS, tunnels, public exposure, and destructive workload lifecycle actions.
+- Agents may explain trade-offs, inspect current state read-only, prepare commands and rollback steps, review proposed configuration, observe operator-run work, and document verified results. The human operator performs and validates the sensitive change.
+- Agents are the default implementers for documentation, programming, sanitized inventory processing, and non-modifying observational work.
+- An agent may perform a sensitive configuration change only when the operator explicitly assigns that specific, bounded action. Generic permission to edit repository files or assist with a project is not authorization to change infrastructure.
+- Follow the detailed [human and agent operating boundary](docs/reference/human-agent-operating-boundary.md).
+
 ## Public repository security
 
 - Never commit passwords, API keys, access tokens, session cookies, recovery codes, SSH private keys, private certificates, Cloudflare tokens, GitHub PATs, cloud-provider credentials, VPN credentials, `.env` files with secrets, or authentication material.

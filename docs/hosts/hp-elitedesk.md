@@ -1,6 +1,6 @@
 # HP EliteDesk 800 G5 Mini
 
-**Status:** deployed physical host. Core hardware was command-verified on 2026-09-14, and its NIC, link, host resources, and guest startup were checked again on 2026-10-06. Confirm mutable values before capacity or compatibility decisions.
+**Status:** deployed physical host. Core hardware was command-verified on 2026-09-14; its host resources and guest startup were checked on 2026-10-06, and its link and guest inventory were checked again on 2026-10-07. Confirm mutable values before capacity or compatibility decisions.
 
 ## Hardware
 
@@ -15,7 +15,7 @@
 ## Installed platform and hosted services
 
 - Installed OS/platform: [Proxmox VE](../services/proxmox-ve.md) on Debian GNU/Linux 13 (`trixie`), x86-64; the last verified runtime versions and virtual storage layout are in the platform record.
-- Hosted workloads: [Home Assistant](../services/home-assistant.md) VM, a verified [Tailscale subnet-router](../services/tailscale.md) LXC, and a stopped portfolio-preparation VM with no installed OS or virtual NIC. The LXC starts first and Home Assistant second after host boot, verified during a 2026-10-06 controlled reboot.
+- Hosted workloads: [Home Assistant](../services/home-assistant.md) VM and a verified [Tailscale subnet-router](../services/tailscale.md) LXC. The LXC starts first and Home Assistant second after host boot, verified during a 2026-10-06 controlled reboot. A failed [portfolio VM installation attempt](../history/portfolio-vm-installation-attempt.md) and all of its temporary host-network changes were removed on 2026-10-07.
 - Remote Proxmox administration is reached through Tailscale according to the reported state. Exact endpoint, addressing, guest IDs, and authentication material are not published.
 
 The dated initial guest count, storage utilization, memory/load figures, and LXC usage remain in [Proxmox baseline history](../history/proxmox-baseline.md). A fresh low-load capacity snapshot was added there on 2026-10-06; it is not peak sizing evidence.
